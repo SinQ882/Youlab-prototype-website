@@ -10,11 +10,9 @@ export default function Footer({ navigate }) {
     <footer style={{ background: '#fff', borderTop: '1px solid #E8EDF5', padding: '40px 24px' }}>
       <div style={{ maxWidth: 1120, margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 20 }}>
         {/* Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 28, height: 28, background: 'linear-gradient(135deg, #4361EE, #7B68EE)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ color: '#fff', fontWeight: 800, fontSize: 14 }}>Y</span>
-          </div>
-          <span style={{ fontSize: 16, fontWeight: 800, color: '#0B0B3B', letterSpacing: -0.3 }}>YouLab</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <img src="./youlab-icon.svg" alt="YouLab icon" width={30} height={30} />
+          <span style={{ fontSize: 18, fontWeight: 800, color: '#4361EE', letterSpacing: -0.3 }}>YouLab</span>
         </div>
 
         {/* Links */}

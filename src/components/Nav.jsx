@@ -44,17 +44,10 @@ export default function Nav({ page, navigate, scrolled }) {
         {/* Logo */}
         <button
           onClick={() => navigate('home')}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8 }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 10 }}
         >
-          <div style={{
-            width: 34, height: 34,
-            background: 'linear-gradient(135deg, #4361EE 0%, #7B68EE 100%)',
-            borderRadius: 10,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            <span style={{ color: '#fff', fontWeight: 800, fontSize: 16, letterSpacing: -0.5 }}>Y</span>
-          </div>
-          <span style={{ fontSize: 20, fontWeight: 800, color: C.navy, letterSpacing: -0.5 }}>YouLab</span>
+          <img src="./youlab-icon.svg" alt="YouLab icon" width={36} height={36} />
+          <span style={{ fontSize: 22, fontWeight: 800, color: C.blue, letterSpacing: -0.5 }}>YouLab</span>
         </button>
 
         {/* Desktop nav */}
