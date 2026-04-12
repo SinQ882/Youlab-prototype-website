@@ -2,40 +2,48 @@ import { Layout, Zap, MessageSquare, Users, ArrowRight } from 'lucide-react';
 import { PillBadge, Section } from './ui.jsx';
 import { MockBoard, MockCanvas, MockChat, MockUsers } from './Mockups.jsx';
 
-const features = [
+const featureData = [
   {
-    icon: Layout,
+    Icon: Layout,
     iconBg: '#EEF2FF',
     title: 'Projectbord met structuur',
     text: 'Taken, subtaken, mijlpalen en statussen. Wijs verantwoordelijken aan en zie in één oogopslag waar het project staat.',
-    mockup: <MockBoard />,
+    mockupType: 'board',
     reverse: false,
   },
   {
-    icon: Zap,
+    Icon: Zap,
     iconBg: '#FEF3C7',
     title: 'Interactieve werkvormen',
     text: 'Werk samen in real-time aan bewezen werkvormen met duidelijke uitleg. Van systeemmap tot empathy map.',
-    mockup: <MockCanvas type="systeemmap" />,
+    mockupType: 'canvas',
     reverse: true,
   },
   {
-    icon: MessageSquare,
+    Icon: MessageSquare,
     iconBg: '#F0FDF4',
     title: 'Communicatie op één plek',
     text: 'Berichten op taak- of projectniveau. Tag teamgenoten en krijg notificaties zodat niets meer verloren gaat.',
-    mockup: <MockChat />,
+    mockupType: 'chat',
     reverse: false,
   },
   {
-    icon: Users,
+    Icon: Users,
     iconBg: '#FFF1F2',
     title: 'Samenwerk met iedereen',
     text: 'Externe experts werken altijd gratis mee. Beheer gebruikers op elk niveau met duidelijke rollen.',
-    mockup: <MockUsers />,
+    mockupType: 'users',
     reverse: true,
   },
 ];
+
+function renderMockup(type) {
+  if (type === 'board') return <MockBoard />;
+  if (type === 'canvas') return <MockCanvas type="systeemmap" />;
+  if (type === 'chat') return <MockChat />;
+  if (type === 'users') return <MockUsers />;
+  return null;
+}
 
 export default function FeaturesSection({ navigate }) {
   return (
@@ -47,8 +55,8 @@ export default function FeaturesSection({ navigate }) {
         </h2>
       </div>
 
-      {features.map((f, i) => {
-        const Icon = f.icon;
+      {featureData.map((f, i) => {
+        const { Icon } = f;
         return (
           <div key={i} style={{
             display: 'flex',
@@ -59,7 +67,7 @@ export default function FeaturesSection({ navigate }) {
             flexDirection: f.reverse ? 'row-reverse' : 'row',
           }}>
             <div style={{ flex: '1 1 400px', minWidth: 280 }}>
-              {f.mockup}
+              {renderMockup(f.mockupType)}
             </div>
             <div style={{ flex: '1 1 360px', minWidth: 280 }}>
               <div style={{ width: 52, height: 52, borderRadius: 14, background: f.iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
