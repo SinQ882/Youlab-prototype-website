@@ -9,7 +9,7 @@
   --color-slate: #64748B;
   --color-green: #10B981;
   --color-yellow: #F59E0B;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 @layer base {
@@ -22,7 +22,7 @@
     padding: 0;
   }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background-color: #FAFAFE;
     color: #0B0B3B;
     -webkit-font-smoothing: antialiased;
@@ -31,5 +31,17 @@
   #root {
     width: 100%;
     min-height: 100vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+  .timeline-line {
+    display: none !important;
   }
 }

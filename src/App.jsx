@@ -55,7 +55,7 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <div style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", color: '#0B0B3B', background: '#FAFAFE', minHeight: '100vh' }}>
+      <div style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", color: '#0B0B3B', background: '#FAFAFE', minHeight: '100vh' }}>
         <Nav page={page} navigate={navigate} scrolled={scrolled} />
         <ErrorBoundary>
           {page === 'home' && <HomePage navigate={navigate} />}

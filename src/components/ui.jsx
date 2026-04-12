@@ -35,10 +35,11 @@ export function PrimaryBtn({ children, onClick, size = 'md' }) {
         display: 'inline-flex',
         alignItems: 'center',
         gap: 8,
-        transition: 'opacity 0.2s, transform 0.2s',
+        transition: 'opacity 0.2s, transform 0.2s, box-shadow 0.2s',
+        boxShadow: '0 4px 14px rgba(67,97,238,0.35)',
       }}
-      onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
-      onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)'; }}
+      onMouseEnter={e => { e.currentTarget.style.opacity = '0.92'; e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(67,97,238,0.45)'; }}
+      onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(67,97,238,0.35)'; }}
     >
       {children}
     </button>
@@ -100,6 +101,7 @@ export function PillBadge({ children }) {
       borderRadius: 100,
       letterSpacing: 0.2,
       display: 'inline-block',
+      border: '1px solid rgba(67,97,238,0.15)',
     }}>
       {children}
     </span>
