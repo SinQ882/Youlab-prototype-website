@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  base: '/youlab-prototype-website/',
+  base: '/Youlab-prototype-website/',
   plugins: [
     tailwindcss(),
     react(),
