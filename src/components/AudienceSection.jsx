@@ -55,7 +55,7 @@ export default function AudienceSection() {
           const { Icon } = a;
           return (
             <div key={i} style={{
-              background: '#fff',
+              background: 'rgba(255,255,255,0.88)',
               borderRadius: 20,
               padding: '32px 28px',
               border: '1px solid #E8EDF5',

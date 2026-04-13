@@ -4,6 +4,7 @@ import HomePage from './components/HomePage';
 import ToolboxPage from './components/ToolboxPage';
 import UpdatesPage from './components/UpdatesPage';
 import UpdateDetailPage from './components/UpdateDetailPage';
+import AnimatedBackground from './components/AnimatedBackground';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -57,15 +58,18 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <div style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", color: '#0B0B3B', background: '#FAFAFE', minHeight: '100vh' }}>
-        <Nav page={page} navigate={navigate} scrolled={scrolled} />
-        <ErrorBoundary>
-          {page === 'home'          && <HomePage navigate={navigate} />}
-          {page === 'toolbox'       && <ToolboxPage navigate={navigate} initialToolId={toolId} />}
-          {page === 'updates'       && <UpdatesPage navigate={navigate} />}
-          {page === 'update-detail' && <UpdateDetailPage navigate={navigate} updateId={toolId} />}
-        </ErrorBoundary>
-      </div>
+      <>
+        <AnimatedBackground />
+        <div style={{ position: 'relative', zIndex: 1, fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", color: '#0B0B3B', background: 'transparent', minHeight: '100vh' }}>
+          <Nav page={page} navigate={navigate} scrolled={scrolled} />
+          <ErrorBoundary>
+            {page === 'home'          && <HomePage navigate={navigate} />}
+            {page === 'toolbox'       && <ToolboxPage navigate={navigate} initialToolId={toolId} />}
+            {page === 'updates'       && <UpdatesPage navigate={navigate} />}
+            {page === 'update-detail' && <UpdateDetailPage navigate={navigate} updateId={toolId} />}
+          </ErrorBoundary>
+        </div>
+      </>
     </ErrorBoundary>
   );
 }

@@ -15,7 +15,7 @@ export default function HeroSection({ navigate }) {
     <>
       {/* Hero */}
       <section style={{
-        background: '#fff',
+        background: 'rgba(255,255,255,0.82)',
         padding: '100px 0 80px',
         overflow: 'hidden',
         position: 'relative',
@@ -119,7 +119,7 @@ export default function HeroSection({ navigate }) {
       </section>
 
       {/* Stats + Logo strip */}
-      <section style={{ padding: '32px 0', background: '#F8FAFF', borderTop: '1px solid #F1F5F9', borderBottom: '1px solid #F1F5F9' }}>
+      <section style={{ padding: '32px 0', background: 'rgba(248,250,255,0.82)', borderTop: '1px solid #F1F5F9', borderBottom: '1px solid #F1F5F9' }}>
         <div style={{ maxWidth: 1120, margin: '0 auto', padding: '0 24px' }}>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'center', justifyContent: 'space-between' }}>
             {/* Stats */}

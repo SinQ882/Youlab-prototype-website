@@ -13,7 +13,7 @@ const faqs = [
 export default function FaqSection() {
   const [open, setOpen] = useState(null);
   return (
-    <Section bg="#F8FAFF">
+    <Section bg="rgba(248,250,255,0.80)">
       <div style={{ textAlign: 'center', maxWidth: 580, margin: '0 auto 56px' }}>
         <PillBadge>Veelgestelde vragen</PillBadge>
         <h2 style={{ fontSize: 'clamp(28px, 4vw, 38px)', fontWeight: 800, color: '#0B0B3B', marginTop: 16, letterSpacing: -0.8 }}>
@@ -23,7 +23,7 @@ export default function FaqSection() {
       <div style={{ maxWidth: 720, margin: '0 auto' }}>
         {faqs.map((faq, i) => (
           <div key={i} style={{
-            background: '#fff',
+            background: 'rgba(255,255,255,0.88)',
             borderRadius: 16,
             marginBottom: 10,
             border: '1px solid #E8EDF5',
