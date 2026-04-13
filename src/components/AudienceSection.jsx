@@ -1,5 +1,6 @@
 import { Building2, GraduationCap, Briefcase, UserCheck } from 'lucide-react';
-import { PillBadge, Section } from './ui.jsx';
+import { Section, PillBadge } from './ui.jsx';
+import { Card } from './ui/card.jsx';
 
 const audiences = [
   {
@@ -8,8 +9,8 @@ const audiences = [
     desc: 'Werk aan leefbaarheid, duurzaamheid of participatie met alle betrokken partijen.',
     quote: 'Eindelijk overzicht over wie wat doet.',
     author: 'Projectleider, Gemeente',
-    color: '#4361EE',
-    bg: '#EEF2FF',
+    color: '#4057ff',
+    bg: 'bg-secondary',
   },
   {
     Icon: GraduationCap,
@@ -18,7 +19,7 @@ const audiences = [
     quote: 'Studenten werken veel zelfstandiger.',
     author: 'Docent, Saxion Hogeschool',
     color: '#EC4899',
-    bg: '#FCE7F3',
+    bg: 'bg-pink-50 dark:bg-pink-950/20',
   },
   {
     Icon: Briefcase,
@@ -27,7 +28,7 @@ const audiences = [
     quote: null,
     author: null,
     color: '#F59E0B',
-    bg: '#FEF3C7',
+    bg: 'bg-amber-50 dark:bg-amber-950/20',
   },
   {
     Icon: UserCheck,
@@ -36,46 +37,37 @@ const audiences = [
     quote: null,
     author: null,
     color: '#10B981',
-    bg: '#F0FDF4',
+    bg: 'bg-emerald-50 dark:bg-emerald-950/20',
   },
 ];
 
 export default function AudienceSection() {
   return (
-    <Section id="voor-wie">
-      <div style={{ textAlign: 'center', maxWidth: 580, margin: '0 auto 56px' }}>
+    <Section id="voor-wie" className="bg-muted/40">
+      <div className="text-center max-w-[580px] mx-auto mb-14">
         <PillBadge>Voor wie?</PillBadge>
-        <h2 style={{ fontSize: 'clamp(28px, 4vw, 38px)', fontWeight: 800, color: '#0B0B3B', marginTop: 16, letterSpacing: -0.8 }}>
+        <h2 className="text-foreground text-[clamp(28px,4vw,38px)] font-extrabold mt-4 tracking-tight">
           Gemaakt voor teams die samen verbeteren
         </h2>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5">
         {audiences.map((a, i) => {
           const { Icon } = a;
           return (
-            <div key={i} style={{
-              background: '#fff',
-              borderRadius: 20,
-              padding: '32px 28px',
-              border: '1px solid #E8EDF5',
-              transition: 'transform 0.2s, box-shadow 0.2s',
-            }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(67,97,238,0.1)'; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
-            >
-              <div style={{ width: 52, height: 52, borderRadius: 14, background: a.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-                <Icon size={24} color={a.color} />
+            <Card key={i} className="p-8 hover:-translate-y-0.5 hover:shadow-md">
+              <div className={`w-13 h-13 rounded-2xl flex items-center justify-center mb-5 ${a.bg}`}>
+                <Icon size={24} style={{ color: a.color }} />
               </div>
-              <h3 style={{ fontSize: 18, fontWeight: 700, color: '#0B0B3B', marginBottom: 10 }}>{a.title}</h3>
-              <p style={{ fontSize: 14, color: '#64748B', lineHeight: 1.6, margin: '0 0 20px' }}>{a.desc}</p>
+              <h3 className="text-lg font-bold text-foreground mb-2.5">{a.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-5">{a.desc}</p>
               {a.quote && (
-                <div style={{ borderLeft: `3px solid ${a.color}`, paddingLeft: 14 }}>
-                  <p style={{ fontSize: 14, fontStyle: 'italic', color: '#0B0B3B', fontWeight: 500, marginBottom: 4 }}>"{a.quote}"</p>
-                  <p style={{ fontSize: 12, color: '#94A3B8' }}>{a.author}</p>
+                <div style={{ borderLeft: `3px solid ${a.color}` }} className="pl-3.5">
+                  <p className="text-sm italic text-foreground font-medium mb-1">"{a.quote}"</p>
+                  <p className="text-xs text-muted-foreground">{a.author}</p>
                 </div>
               )}
-            </div>
+            </Card>
           );
         })}
       </div>

@@ -14,18 +14,18 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.error) {
       return (
-        <div style={{ padding: 40, fontFamily: 'sans-serif', maxWidth: 600, margin: '80px auto', textAlign: 'center' }}>
-          <div style={{ fontSize: 48, marginBottom: 16 }}>⚠️</div>
-          <h2 style={{ color: '#0B0B3B', marginBottom: 12 }}>Er ging iets mis</h2>
-          <p style={{ color: '#64748B', marginBottom: 24, lineHeight: 1.6 }}>
+        <div className="flex flex-col items-center justify-center min-h-screen p-10 text-center font-sans">
+          <div className="text-5xl mb-4">⚠️</div>
+          <h2 className="text-foreground text-xl font-semibold mb-3">Er ging iets mis</h2>
+          <p className="text-muted-foreground mb-6 leading-relaxed max-w-md">
             De pagina kon niet worden geladen. Ververs de pagina om het opnieuw te proberen.
           </p>
-          <pre style={{ background: '#F8FAFF', border: '1px solid #E2E8F0', borderRadius: 8, padding: 16, fontSize: 12, color: '#EF4444', textAlign: 'left', overflowX: 'auto' }}>
+          <pre className="bg-muted border border-border rounded-lg p-4 text-xs text-destructive text-left overflow-x-auto max-w-lg mb-5">
             {this.state.error}
           </pre>
           <button
             onClick={() => window.location.reload()}
-            style={{ marginTop: 20, background: '#4361EE', color: '#fff', border: 'none', borderRadius: 10, padding: '12px 28px', fontSize: 15, fontWeight: 600, cursor: 'pointer' }}
+            className="bg-primary text-primary-foreground rounded-xl px-7 py-3 text-sm font-semibold cursor-pointer border-0 hover:opacity-90"
           >
             Pagina vernieuwen
           </button>
@@ -40,6 +40,18 @@ export default function App() {
   const [page, setPage] = useState('home');
   const [toolId, setToolId] = useState(null);
   const [scrolled, setScrolled] = useState(false);
+  const [dark, setDark] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    const stored = localStorage.getItem('theme');
+    if (stored) return stored === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  // Apply / remove .dark class on <html>
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', dark);
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  }, [dark]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -55,10 +67,10 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <div style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", color: '#0B0B3B', background: '#FAFAFE', minHeight: '100vh' }}>
-        <Nav page={page} navigate={navigate} scrolled={scrolled} />
+      <div className="min-h-screen bg-background text-foreground font-sans">
+        <Nav page={page} navigate={navigate} scrolled={scrolled} dark={dark} toggleDark={() => setDark(d => !d)} />
         <ErrorBoundary>
-          {page === 'home' && <HomePage navigate={navigate} />}
+          {page === 'home'    && <HomePage navigate={navigate} />}
           {page === 'toolbox' && <ToolboxPage navigate={navigate} initialToolId={toolId} />}
         </ErrorBoundary>
       </div>
