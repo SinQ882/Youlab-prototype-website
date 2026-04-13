@@ -2,6 +2,8 @@ import { useState, useEffect, Component } from 'react';
 import Nav from './components/Nav';
 import HomePage from './components/HomePage';
 import ToolboxPage from './components/ToolboxPage';
+import UpdatesPage from './components/UpdatesPage';
+import UpdateDetailPage from './components/UpdateDetailPage';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -58,8 +60,10 @@ export default function App() {
       <div style={{ fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", color: '#0B0B3B', background: '#FAFAFE', minHeight: '100vh' }}>
         <Nav page={page} navigate={navigate} scrolled={scrolled} />
         <ErrorBoundary>
-          {page === 'home' && <HomePage navigate={navigate} />}
-          {page === 'toolbox' && <ToolboxPage navigate={navigate} initialToolId={toolId} />}
+          {page === 'home'          && <HomePage navigate={navigate} />}
+          {page === 'toolbox'       && <ToolboxPage navigate={navigate} initialToolId={toolId} />}
+          {page === 'updates'       && <UpdatesPage navigate={navigate} />}
+          {page === 'update-detail' && <UpdateDetailPage navigate={navigate} updateId={toolId} />}
         </ErrorBoundary>
       </div>
     </ErrorBoundary>

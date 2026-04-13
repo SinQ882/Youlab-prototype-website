@@ -55,6 +55,12 @@ export default function Nav({ page, navigate, scrolled }) {
           >
             Toolbox
           </NavBtn>
+          <NavBtn
+            active={page === 'updates' || page === 'update-detail'}
+            onClick={() => navigate('updates')}
+          >
+            Updates
+          </NavBtn>
           <NavBtn onClick={() => scrollToSection('pricing')}>
             Prijzen
           </NavBtn>
@@ -134,6 +140,12 @@ export default function Nav({ page, navigate, scrolled }) {
               style={{ background: page === 'toolbox' ? '#EEF2FF' : 'none', border: 'none', cursor: 'pointer', padding: '12px 14px', borderRadius: 10, fontSize: 16, fontWeight: 600, color: page === 'toolbox' ? C.blue : C.navy, textAlign: 'left' }}
             >
               Toolbox
+            </button>
+            <button
+              onClick={() => { navigate('updates'); setMenuOpen(false); }}
+              style={{ background: (page === 'updates' || page === 'update-detail') ? '#EEF2FF' : 'none', border: 'none', cursor: 'pointer', padding: '12px 14px', borderRadius: 10, fontSize: 16, fontWeight: 600, color: (page === 'updates' || page === 'update-detail') ? C.blue : C.navy, textAlign: 'left' }}
+            >
+              Updates
             </button>
             <button
               onClick={() => scrollToSection('pricing')}

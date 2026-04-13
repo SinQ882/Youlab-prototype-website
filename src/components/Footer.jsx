@@ -1,6 +1,7 @@
 export default function Footer({ navigate }) {
   const links = [
     { label: 'Toolbox', action: () => navigate('toolbox') },
+    { label: 'Updates', action: () => navigate('updates') },
     { label: 'Privacyverklaring', href: '#' },
     { label: 'Contact', href: 'mailto:info@youlab.nl' },
     { label: 'Inloggen', href: 'https://app.youlab.nl' },
