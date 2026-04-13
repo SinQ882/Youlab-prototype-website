@@ -34,6 +34,10 @@
   }
 }
 
+/* Approach section: desktop = scroll-driven track, mobile = swipe carousel */
+.approach-desktop { display: block; }
+.approach-mobile  { display: none; }
+
 @media (max-width: 768px) {
   .desktop-nav {
     display: none !important;
@@ -41,7 +45,10 @@
   .mobile-menu-btn {
     display: flex !important;
   }
-  .timeline-line {
-    display: none !important;
+  .approach-desktop {
+    display: none;
+  }
+  .approach-mobile {
+    display: block;
   }
 }
