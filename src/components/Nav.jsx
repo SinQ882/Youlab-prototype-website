@@ -36,12 +36,23 @@ export default function Nav({ page, navigate, scrolled, dark, toggleDark }) {
         </button>
 
         {/* Desktop nav */}
-        <nav className="flex items-center gap-1 desktop-nav">
-          <NavBtn active={page === 'toolbox'} onClick={() => navigate('toolbox')}>Toolbox</NavBtn>
-          <NavBtn onClick={() => scrollToSection('pricing')}>Prijzen</NavBtn>
-
-          <div className="w-px h-5 bg-border mx-1.5" />
-
+        <nav style={{ display: 'flex', alignItems: 'center', gap: 2 }} className="desktop-nav">
+          <NavBtn
+            active={page === 'toolbox'}
+            onClick={() => navigate('toolbox')}
+          >
+            Toolbox
+          </NavBtn>
+          <NavBtn
+            active={page === 'updates' || page === 'update-detail'}
+            onClick={() => navigate('updates')}
+          >
+            Updates
+          </NavBtn>
+          <NavBtn onClick={() => scrollToSection('pricing')}>
+            Prijzen
+          </NavBtn>
+          <div style={{ width: 1, height: 20, background: '#E2E8F0', margin: '0 6px' }} />
           <a
             href="https://app.youlab.nl"
             target="_blank"
@@ -96,6 +107,12 @@ export default function Nav({ page, navigate, scrolled, dark, toggleDark }) {
               )}
             >
               Toolbox
+            </button>
+            <button
+              onClick={() => { navigate('updates'); setMenuOpen(false); }}
+              style={{ background: (page === 'updates' || page === 'update-detail') ? '#EEF2FF' : 'none', border: 'none', cursor: 'pointer', padding: '12px 14px', borderRadius: 10, fontSize: 16, fontWeight: 600, color: (page === 'updates' || page === 'update-detail') ? C.blue : C.navy, textAlign: 'left' }}
+            >
+              Updates
             </button>
             <button
               onClick={() => scrollToSection('pricing')}
