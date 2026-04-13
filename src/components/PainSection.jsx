@@ -1,6 +1,5 @@
-import { MessageSquareOff, TrendingDown, RefreshCw, GitMerge, ArrowRight } from 'lucide-react';
+import { MessageSquareOff, TrendingDown, RefreshCw, GitMerge } from 'lucide-react';
 import { Section, PillBadge } from './ui.jsx';
-import { Button } from './ui/button.jsx';
 import { Card } from './ui/card.jsx';
 
 const painPoints = [
@@ -46,7 +45,7 @@ export default function PainSection() {
       </div>
 
       {/* Pain cards */}
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4 mb-8">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4">
         {painPoints.map((p, i) => {
           const { Icon } = p;
           return (
@@ -65,18 +64,6 @@ export default function PainSection() {
             </Card>
           );
         })}
-      </div>
-
-      {/* Solution callout */}
-      <div className="rounded-2xl bg-foreground p-7 flex flex-wrap items-center justify-between gap-5">
-        <p className="text-base font-semibold text-background leading-relaxed max-w-[560px]">
-          Dit kan anders.{' '}
-          <span className="text-primary">YouLab</span>
-          {' '}geeft je team structuur, werkvormen en overzicht – op één plek.
-        </p>
-        <Button variant="gradient" size="lg">
-          Plan een demo <ArrowRight size={15} />
-        </Button>
       </div>
     </Section>
   );
