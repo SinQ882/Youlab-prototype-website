@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { CheckCircle, ArrowRight } from 'lucide-react';
-import { PillBadge, Section } from './ui.jsx';
+import { Section, PillBadge } from './ui.jsx';
+import { Button } from './ui/button.jsx';
+import { cn } from '../lib/utils.js';
 
 const plans = [
   {
@@ -35,8 +37,7 @@ const plans = [
 function formatPrice(plan, billing) {
   if (plan.monthlyPrice === null) return { price: 'Gratis', unit: 'altijd' };
   if (billing === 'annual') {
-    const discounted = Math.round(plan.monthlyPrice * 0.8);
-    return { price: `€${discounted}`, unit: '/gebruiker/mnd' };
+    return { price: `€${Math.round(plan.monthlyPrice * 0.8)}`, unit: '/gebruiker/mnd' };
   }
   return { price: `€${plan.monthlyPrice}`, unit: '/gebruiker/mnd' };
 }
@@ -45,118 +46,99 @@ export default function PricingSection() {
   const [billing, setBilling] = useState('monthly');
 
   return (
-    <Section bg="#F8FAFF" id="pricing">
-      <div style={{ textAlign: 'center', maxWidth: 580, margin: '0 auto 48px' }}>
+    <Section className="bg-muted/40" id="pricing">
+      <div className="text-center max-w-[580px] mx-auto mb-12">
         <PillBadge>Transparante prijzen</PillBadge>
-        <h2 style={{ fontSize: 'clamp(28px, 4vw, 38px)', fontWeight: 800, color: '#0B0B3B', marginTop: 16, letterSpacing: -0.8 }}>
+        <h2 className="text-foreground text-[clamp(28px,4vw,38px)] font-extrabold mt-4 tracking-tight">
           Eerlijk en eenvoudig
         </h2>
-        <p style={{ fontSize: 16, color: '#64748B', marginTop: 12 }}>Per gebruiker per maand, geen verborgen kosten.</p>
+        <p className="text-muted-foreground mt-3">Per gebruiker per maand, geen verborgen kosten.</p>
 
         {/* Billing toggle */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: '#fff', borderRadius: 12, padding: 4, border: '1px solid #E8EDF5', marginTop: 24, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+        <div className="inline-flex items-center gap-1 bg-card rounded-xl p-1 border border-border mt-6 shadow-sm">
           <ToggleBtn active={billing === 'monthly'} onClick={() => setBilling('monthly')}>
             Maandelijks
           </ToggleBtn>
           <ToggleBtn active={billing === 'annual'} onClick={() => setBilling('annual')}>
             Jaarlijks
-            <span style={{
-              marginLeft: 6,
-              background: billing === 'annual' ? '#10B981' : '#F0FDF4',
-              color: billing === 'annual' ? '#fff' : '#10B981',
-              fontSize: 10,
-              fontWeight: 700,
-              padding: '2px 7px',
-              borderRadius: 100,
-              transition: 'all 0.2s',
-            }}>
+            <span className={cn(
+              'ml-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded-full transition-all',
+              billing === 'annual' ? 'bg-emerald-500 text-white' : 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400'
+            )}>
               −20%
             </span>
           </ToggleBtn>
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, justifyContent: 'center' }}>
+      <div className="flex flex-wrap gap-5 justify-center">
         {plans.map((p, i) => {
           const { price, unit } = formatPrice(p, billing);
           return (
-            <div key={i} style={{
-              background: p.highlight ? 'linear-gradient(160deg, #0B0B3B 0%, #1a1a6c 100%)' : '#fff',
-              borderRadius: 24,
-              padding: '36px 32px',
-              border: p.highlight ? 'none' : '1px solid #E8EDF5',
-              flex: '1 1 280px',
-              maxWidth: 360,
-              minWidth: 260,
-              boxShadow: p.highlight ? '0 24px 64px rgba(67,97,238,0.28)' : '0 2px 12px rgba(0,0,0,0.04)',
-              position: 'relative',
-              transition: 'transform 0.2s, box-shadow 0.2s',
-            }}
-              onMouseEnter={e => { if (!p.highlight) { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(67,97,238,0.12)'; } }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = p.highlight ? '0 24px 64px rgba(67,97,238,0.28)' : '0 2px 12px rgba(0,0,0,0.04)'; }}
+            <div
+              key={i}
+              className={cn(
+                'rounded-3xl p-9 flex-1 basis-[280px] max-w-[360px] min-w-[260px] relative transition-all duration-200',
+                p.highlight
+                  ? 'bg-foreground text-background shadow-2xl'
+                  : 'bg-card border border-border hover:-translate-y-1 hover:shadow-lg'
+              )}
             >
               {p.highlight && (
-                <div style={{ position: 'absolute', top: -13, left: '50%', transform: 'translateX(-50%)', background: 'linear-gradient(135deg, #4361EE, #7B68EE)', color: '#fff', fontSize: 12, fontWeight: 700, padding: '5px 18px', borderRadius: 100, whiteSpace: 'nowrap', boxShadow: '0 4px 12px rgba(67,97,238,0.4)' }}>
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-[#7B68EE] text-white text-xs font-bold px-5 py-1.5 rounded-full whitespace-nowrap shadow-lg">
                   Meest gekozen
                 </div>
               )}
 
-              <div style={{ marginBottom: 4 }}>
-                <span style={{ fontSize: 13, fontWeight: 600, color: p.highlight ? 'rgba(255,255,255,0.5)' : '#94A3B8' }}>{p.sub}</span>
+              <div className={cn('text-[13px] font-semibold mb-1', p.highlight ? 'text-background/50' : 'text-muted-foreground')}>
+                {p.sub}
               </div>
-              <h3 style={{ fontSize: 22, fontWeight: 800, color: p.highlight ? '#fff' : '#0B0B3B', marginBottom: 6 }}>{p.name}</h3>
+              <h3 className={cn('text-[22px] font-extrabold mb-1.5', p.highlight ? 'text-background' : 'text-foreground')}>
+                {p.name}
+              </h3>
 
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginBottom: billing === 'annual' && p.monthlyPrice ? 4 : 28 }}>
-                <span style={{ fontSize: 44, fontWeight: 900, color: p.highlight ? '#fff' : '#0B0B3B', letterSpacing: -2 }}>{price}</span>
-                <span style={{ fontSize: 14, color: p.highlight ? 'rgba(255,255,255,0.5)' : '#94A3B8' }}>{unit}</span>
+              <div className="flex items-baseline gap-1 mb-1">
+                <span className={cn('text-[44px] font-black tracking-tighter', p.highlight ? 'text-background' : 'text-foreground')}>
+                  {price}
+                </span>
+                <span className={cn('text-sm', p.highlight ? 'text-background/50' : 'text-muted-foreground')}>
+                  {unit}
+                </span>
               </div>
 
               {billing === 'annual' && p.monthlyPrice && (
-                <p style={{ fontSize: 12, color: p.highlight ? 'rgba(255,255,255,0.4)' : '#94A3B8', marginBottom: 24 }}>
+                <p className={cn('text-xs mb-6', p.highlight ? 'text-background/40' : 'text-muted-foreground')}>
                   Was €{p.monthlyPrice} · bespaar 20% per jaar
                 </p>
               )}
 
-              <div style={{ borderTop: p.highlight ? '1px solid rgba(255,255,255,0.08)' : '1px solid #F1F5F9', paddingTop: 24, marginBottom: 28 }}>
+              <div className={cn('border-t pt-6 mb-7', p.highlight ? 'border-background/10' : 'border-border', !billing || !p.monthlyPrice ? 'mt-7' : 'mt-0')}>
                 {p.features.map((f, j) => (
-                  <div key={j} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-                    <CheckCircle size={16} color={p.highlight ? '#7B68EE' : '#10B981'} fill={p.highlight ? 'rgba(123,104,238,0.15)' : 'rgba(16,185,129,0.1)'} />
-                    <span style={{ fontSize: 14, color: p.highlight ? 'rgba(255,255,255,0.85)' : '#334155', fontWeight: 500 }}>{f}</span>
+                  <div key={j} className="flex items-center gap-2.5 mb-3">
+                    <CheckCircle
+                      size={16}
+                      className={p.highlight ? 'text-primary shrink-0' : 'text-emerald-500 shrink-0'}
+                      fill={p.highlight ? 'rgba(85,112,255,0.2)' : 'rgba(16,185,129,0.1)'}
+                    />
+                    <span className={cn('text-sm font-medium', p.highlight ? 'text-background/85' : 'text-foreground')}>
+                      {f}
+                    </span>
                   </div>
                 ))}
                 {p.note && (
-                  <p style={{ fontSize: 12, color: p.highlight ? 'rgba(255,255,255,0.35)' : '#94A3B8', marginTop: 8, fontStyle: 'italic' }}>{p.note}</p>
+                  <p className={cn('text-xs mt-2 italic', p.highlight ? 'text-background/35' : 'text-muted-foreground')}>
+                    {p.note}
+                  </p>
                 )}
               </div>
 
-              <button style={{
-                width: '100%',
-                background: p.highlight ? 'linear-gradient(135deg, #4361EE, #7B68EE)' : 'transparent',
-                border: p.highlight ? 'none' : '2px solid #E2E8F0',
-                borderRadius: 12,
-                padding: '13px 24px',
-                fontSize: 15,
-                fontWeight: 700,
-                color: p.highlight ? '#fff' : '#0B0B3B',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 8,
-                transition: 'all 0.2s',
-                boxShadow: p.highlight ? '0 4px 16px rgba(67,97,238,0.4)' : 'none',
-              }}
-                onMouseEnter={e => {
-                  if (p.highlight) { e.currentTarget.style.opacity = '0.88'; }
-                  else { e.currentTarget.style.borderColor = '#0B0B3B'; e.currentTarget.style.background = '#0B0B3B'; e.currentTarget.style.color = '#fff'; }
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.opacity = '1';
-                  if (!p.highlight) { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#0B0B3B'; }
-                }}
+              <Button
+                variant={p.highlight ? 'gradient' : 'outline'}
+                size="lg"
+                className="w-full"
               >
                 {p.cta} <ArrowRight size={15} />
-              </button>
+              </Button>
             </div>
           );
         })}
@@ -169,20 +151,10 @@ function ToggleBtn({ children, active, onClick }) {
   return (
     <button
       onClick={onClick}
-      style={{
-        background: active ? '#4361EE' : 'transparent',
-        border: 'none',
-        cursor: 'pointer',
-        padding: '8px 18px',
-        borderRadius: 9,
-        fontSize: 14,
-        fontWeight: 600,
-        color: active ? '#fff' : '#64748B',
-        transition: 'all 0.2s',
-        display: 'flex',
-        alignItems: 'center',
-        gap: 0,
-      }}
+      className={cn(
+        'flex items-center px-4 py-2 rounded-lg text-sm font-semibold border-0 cursor-pointer transition-all duration-200',
+        active ? 'bg-primary text-primary-foreground' : 'bg-transparent text-muted-foreground hover:text-foreground'
+      )}
     >
       {children}
     </button>
