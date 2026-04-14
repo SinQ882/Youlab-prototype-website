@@ -3,7 +3,7 @@ import LogosSection from './LogosSection.jsx';
 import ImpactSection from './ImpactSection.jsx';
 import ApproachSection from './ApproachSection.jsx';
 import FeaturesSection from './FeaturesSection.jsx';
-import AudienceSection from './AudienceSection.jsx';
+import ScenarioSection from './ScenarioSection.jsx';
 import FaqSection from './FaqSection.jsx';
 import CtaSection from './CtaSection.jsx';
 import Footer from './Footer.jsx';
@@ -16,8 +16,7 @@ export default function HomePage({ navigate }) {
       <ImpactSection />
       <ApproachSection navigate={navigate} />
       <FeaturesSection navigate={navigate} />
-      {/* AudienceSection wordt vervangen door ScenarioSection in stap 6 */}
-      <AudienceSection />
+      <ScenarioSection />
       <FaqSection />
       <CtaSection />
       <Footer navigate={navigate} />
