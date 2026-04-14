@@ -4,6 +4,7 @@ import HomePage from './components/HomePage';
 import ToolboxPage from './components/ToolboxPage';
 import UpdatesPage from './components/UpdatesPage';
 import UpdateDetailPage from './components/UpdateDetailPage';
+import AnimatedBackground from './components/AnimatedBackground';
 
 class ErrorBoundary extends Component {
   constructor(props) {
