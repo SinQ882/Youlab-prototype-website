@@ -1,148 +1,105 @@
-import { ArrowRight, Star } from 'lucide-react';
-import { PrimaryBtn, OutlineBtn, PillBadge } from './ui.jsx';
-import { MockBoard } from './Mockups.jsx';
-
-const stats = [
-  { value: '500+', label: 'Actieve teams' },
-  { value: '12k+', label: 'Gebruikers' },
-  { value: '4.8', label: 'Beoordeling' },
-];
-
-const logos = ['Saxion', 'HAN', 'Windesheim', 'Pioneering', 'Smart.af', 'TriMotion'];
+import { ArrowRight, ChevronRight, Star } from 'lucide-react';
+import { Button } from './ui/button.jsx';
+import { MockBoard, MockCanvas, MockChat } from './Mockups.jsx';
 
 export default function HeroSection({ navigate }) {
   return (
-    <>
-      {/* Hero */}
-      <section style={{
-        background: '#fff',
-        padding: '100px 0 80px',
-        overflow: 'hidden',
-        position: 'relative',
-      }}>
-        {/* Decorative gradient blobs */}
-        <div style={{
-          position: 'absolute', top: -180, right: -180, width: 600, height: 600,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(67,97,238,0.10) 0%, rgba(123,104,238,0.05) 45%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
-        <div style={{
-          position: 'absolute', bottom: -80, left: -120, width: 480, height: 480,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(123,104,238,0.07) 0%, transparent 60%)',
-          pointerEvents: 'none',
-        }} />
+    <section className="bg-background pt-[calc(68px+80px)] pb-0 overflow-hidden relative">
+      {/* Subtle radial glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, rgba(64,87,255,0.09) 0%, transparent 65%)' }} />
 
-        <div style={{ maxWidth: 1120, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 56, alignItems: 'center' }}>
-            {/* Left */}
-            <div style={{ flex: '1 1 440px', minWidth: 300 }}>
-              <PillBadge>Het platform voor projecten die impact maken</PillBadge>
-              <h1 style={{
-                fontSize: 'clamp(36px, 5vw, 58px)',
-                fontWeight: 900,
-                lineHeight: 1.05,
-                color: '#0B0B3B',
-                margin: '20px 0 20px',
-                letterSpacing: -2,
-              }}>
-                Werk samen aan projecten die{' '}
-                <span style={{
-                  background: 'linear-gradient(135deg, #4361EE 0%, #7B68EE 60%, #a855f7 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}>
-                  écht iets verbeteren
-                </span>
-              </h1>
-              <p style={{ fontSize: 18, color: '#64748B', lineHeight: 1.7, marginBottom: 36, maxWidth: 480 }}>
-                YouLab is het online platform waar teams samen vraagstukken aanpakken. Met een helder stappenplan, praktische werkvormen en alles op één plek.
-              </p>
-              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 20 }}>
-                <PrimaryBtn>
-                  Plan een gratis demo <ArrowRight size={18} />
-                </PrimaryBtn>
-                <OutlineBtn onClick={() => navigate('toolbox')}>
-                  Bekijk de toolbox
-                </OutlineBtn>
-              </div>
-              {/* Rating */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <div style={{ display: 'flex', gap: 2 }}>
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} color="#F59E0B" fill="#F59E0B" />
-                  ))}
-                </div>
-                <span style={{ fontSize: 13, color: '#94A3B8' }}>
-                  Beoordeeld met <strong style={{ color: '#0B0B3B' }}>4.8/5</strong> · Geen account nodig
-                </span>
+      <div className="max-w-[1280px] mx-auto px-8 relative">
+        {/* Centred text block */}
+        <div className="flex flex-col items-center text-center max-w-[896px] mx-auto">
+          {/* Pill label */}
+          <span className="inline-flex items-center rounded-full border border-primary/15 bg-secondary text-secondary-foreground px-4 py-1.5 text-[13px] font-semibold tracking-[0.2px] mb-8">
+            Het platform voor projecten die impact maken
+          </span>
+
+          {/* Display heading */}
+          <h1 className="text-foreground font-semibold leading-none tracking-tight mb-6"
+            style={{ fontSize: 'clamp(42px, 6.5vw, 80px)' }}>
+            Werk samen aan projecten die{' '}
+            <span className="bg-gradient-to-br from-primary via-[#6575ff] to-[#a855f7] bg-clip-text text-transparent">
+              écht iets verbeteren
+            </span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-muted-foreground text-xl leading-7 max-w-[672px] mb-8">
+            YouLab is het online platform waar teams samen vraagstukken aanpakken.
+            Met een helder stappenplan, praktische werkvormen en alles op één plek.
+          </p>
+
+          {/* CTA buttons */}
+          <div className="flex flex-wrap gap-2 items-center justify-center mb-6">
+            <Button variant="gradient" size="lg">
+              Plan een gratis demo <ArrowRight size={16} />
+            </Button>
+            <Button variant="secondary" size="lg" onClick={() => navigate('toolbox')}>
+              Bekijk de toolbox <ChevronRight size={16} />
+            </Button>
+          </div>
+
+          {/* Rating */}
+          <div className="flex items-center gap-2 mb-20">
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={14} className="fill-yellow-400 text-yellow-400" />
+              ))}
+            </div>
+            <span className="text-[13px] text-muted-foreground">
+              Beoordeeld met <strong className="text-foreground font-semibold">4.8/5</strong> · Geen account nodig
+            </span>
+          </div>
+        </div>
+
+        {/* ── 3-panel mockup grid (Figma ratio: 3 + 2 + 5 cols) ── */}
+        <div className="grid grid-cols-10 gap-4 h-[480px] overflow-hidden">
+          {/* Panel 1 — Board */}
+          <div className="col-span-3 rounded-xl overflow-hidden border border-border bg-card shadow-lg flex flex-col">
+            <div className="bg-muted/60 border-b border-border px-3 py-2 flex items-center gap-1.5 shrink-0">
+              <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+              <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+              <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+              <div className="flex-1 bg-card rounded text-[10px] text-muted-foreground text-center py-0.5 px-2 ml-2 border border-border">
+                app.youlab.nl/board
               </div>
             </div>
+            <div className="flex-1 p-3 overflow-hidden">
+              <MockBoard />
+            </div>
+          </div>
 
-            {/* Right — browser-framed mockup */}
-            <div style={{ flex: '1 1 420px', minWidth: 300 }}>
-              <div style={{
-                borderRadius: 20,
-                padding: 3,
-                background: 'linear-gradient(135deg, #4361EE40, #7B68EE30)',
-                boxShadow: '0 32px 80px rgba(67,97,238,0.18), 0 8px 24px rgba(0,0,0,0.07)',
-              }}>
-                <div style={{ background: '#fff', borderRadius: 17, overflow: 'hidden' }}>
-                  {/* Browser chrome */}
-                  <div style={{
-                    background: '#F1F5F9',
-                    padding: '10px 16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    borderBottom: '1px solid #E2E8F0',
-                  }}>
-                    <div style={{ display: 'flex', gap: 5 }}>
-                      <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#FF5F57' }} />
-                      <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#FEBC2E' }} />
-                      <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#28C840' }} />
-                    </div>
-                    <div style={{ flex: 1, background: '#fff', borderRadius: 6, padding: '4px 12px', fontSize: 11, color: '#94A3B8', border: '1px solid #E2E8F0' }}>
-                      app.youlab.nl
-                    </div>
-                  </div>
-                  <div style={{ padding: '16px 16px 0' }}>
-                    <MockBoard />
-                  </div>
-                </div>
+          {/* Panel 2 — Canvas */}
+          <div className="col-span-2 rounded-xl overflow-hidden border border-border bg-card shadow-lg flex flex-col">
+            <div className="bg-muted/60 border-b border-border px-3 py-2 flex items-center gap-1.5 shrink-0">
+              <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+              <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+              <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+            </div>
+            <div className="flex-1 p-3 overflow-hidden">
+              <MockCanvas type="empathy" />
+            </div>
+          </div>
+
+          {/* Panel 3 — Chat */}
+          <div className="col-span-5 rounded-xl overflow-hidden border border-border bg-card shadow-lg flex flex-col">
+            <div className="bg-muted/60 border-b border-border px-3 py-2 flex items-center gap-1.5 shrink-0">
+              <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+              <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+              <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+              <div className="flex-1 bg-card rounded text-[10px] text-muted-foreground text-center py-0.5 px-2 ml-2 border border-border">
+                app.youlab.nl/werkvormen
               </div>
+            </div>
+            <div className="flex-1 p-4 overflow-hidden">
+              <MockChat />
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Stats + Logo strip */}
-      <section style={{ padding: '32px 0', background: '#F8FAFF', borderTop: '1px solid #F1F5F9', borderBottom: '1px solid #F1F5F9' }}>
-        <div style={{ maxWidth: 1120, margin: '0 auto', padding: '0 24px' }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'center', justifyContent: 'space-between' }}>
-            {/* Stats */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 40px' }}>
-              {stats.map((s, i) => (
-                <div key={i} style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: 26, fontWeight: 900, color: '#0B0B3B', letterSpacing: -1, lineHeight: 1.1 }}>{s.value}</div>
-                  <div style={{ fontSize: 12, color: '#94A3B8', fontWeight: 500, marginTop: 2 }}>{s.label}</div>
-                </div>
-              ))}
-            </div>
-            {/* Partner logos */}
-            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '6px 24px', opacity: 0.4 }}>
-              <span style={{ fontSize: 11, fontWeight: 700, color: '#0B0B3B', textTransform: 'uppercase', letterSpacing: 1.5 }}>
-                Vertrouwd door
-              </span>
-              {logos.map((l, i) => (
-                <span key={i} style={{ fontSize: 15, fontWeight: 800, color: '#0B0B3B', letterSpacing: -0.3 }}>{l}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

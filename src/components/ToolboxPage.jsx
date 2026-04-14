@@ -1,46 +1,38 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, Clock, Users, CheckCircle, ArrowRight } from 'lucide-react';
 import { tools, phases, goals, formatMap, formatColors, difficultyColors } from '../data/tools.js';
-import { Badge, PrimaryBtn, PillBadge } from './ui.jsx';
+import { PillBadge } from './ui.jsx';
+import { Badge } from './ui/badge.jsx';
+import { Button } from './ui/button.jsx';
+import { Card } from './ui/card.jsx';
 import { MockCanvas } from './Mockups.jsx';
 import Footer from './Footer.jsx';
+import { cn } from '../lib/utils.js';
 
 function ToolCard({ tool, onClick }) {
   const phase = phases.find(p => p.id === tool.phase);
   const fmt = formatColors[tool.format];
   return (
-    <div
+    <Card
       onClick={onClick}
-      style={{
-        background: '#fff',
-        borderRadius: 20,
-        border: '1px solid #E8EDF5',
-        cursor: 'pointer',
-        flex: '1 1 280px',
-        minWidth: 260,
-        maxWidth: 360,
-        overflow: 'hidden',
-        transition: 'box-shadow 0.2s, border-color 0.2s, transform 0.2s',
-      }}
-      onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 8px 32px rgba(67,97,238,0.12)'; e.currentTarget.style.borderColor = '#4361EE'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-      onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = '#E8EDF5'; e.currentTarget.style.transform = 'translateY(0)'; }}
+      className="flex-1 basis-[280px] min-w-[260px] max-w-[360px] overflow-hidden cursor-pointer hover:-translate-y-0.5 hover:shadow-lg hover:border-primary/40"
     >
-      <div style={{ padding: '12px 12px 0' }}>
+      <div className="p-3 pb-0">
         <MockCanvas type={tool.id} />
       </div>
-      <div style={{ padding: '16px 20px 24px' }}>
-        <div style={{ display: 'flex', gap: 6, marginBottom: 10, flexWrap: 'wrap' }}>
-          <Badge bg={phase.bg} color={phase.color}>{phase.label}</Badge>
-          <Badge bg={fmt.bg} color={fmt.color}>{formatMap[tool.format]}</Badge>
+      <div className="p-5 pb-6">
+        <div className="flex gap-1.5 mb-2.5 flex-wrap">
+          <Badge variant="phase" style={{ background: phase.bg, color: phase.color }}>{phase.label}</Badge>
+          <Badge variant="phase" style={{ background: fmt.bg, color: fmt.color }}>{formatMap[tool.format]}</Badge>
         </div>
-        <h3 style={{ fontSize: 17, fontWeight: 700, color: '#0B0B3B', margin: '0 0 4px' }}>{tool.name}</h3>
-        <p style={{ fontSize: 13, color: '#64748B', margin: '0 0 12px', lineHeight: 1.45 }}>{tool.subtitle}</p>
-        <div style={{ display: 'flex', gap: 16, fontSize: 12, color: '#94A3B8' }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}><Clock size={12} />{tool.time}</span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}><Users size={12} />{tool.team} pers.</span>
+        <h3 className="text-[17px] font-bold text-foreground mb-1">{tool.name}</h3>
+        <p className="text-[13px] text-muted-foreground mb-3 leading-snug">{tool.subtitle}</p>
+        <div className="flex gap-4 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1"><Clock size={12} />{tool.time}</span>
+          <span className="flex items-center gap-1"><Users size={12} />{tool.team} pers.</span>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }
 
@@ -51,121 +43,105 @@ function ToolDetail({ tool, onBack }) {
   const related = tool.related.map(id => tools.find(t => t.id === id)).filter(Boolean);
 
   return (
-    <div style={{ maxWidth: 1120, margin: '0 auto', padding: '40px 24px 80px' }}>
-      <button
-        onClick={onBack}
-        style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 600, color: '#4361EE', marginBottom: 32, padding: 0 }}
-      >
-        <ArrowLeft size={18} /> Terug naar toolbox
-      </button>
+    <div className="max-w-[1120px] mx-auto px-6 pt-10 pb-20">
+      <Button variant="link" className="text-primary mb-8 p-0 text-sm" onClick={onBack}>
+        <ArrowLeft size={17} /> Terug naar toolbox
+      </Button>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 48 }}>
+      <div className="flex flex-wrap gap-12">
         {/* Main content */}
-        <div style={{ flex: '1 1 500px', minWidth: 300 }}>
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 20 }}>
-            <Badge bg={phase.bg} color={phase.color}>{phase.label}</Badge>
-            <Badge bg={fmt.bg} color={fmt.color}>{formatMap[tool.format]}</Badge>
-            <Badge bg={diff.bg} color={diff.color}>{tool.difficulty}</Badge>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: '#64748B' }}><Clock size={14} />{tool.time}</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: '#64748B' }}><Users size={14} />{tool.team} pers.</span>
+        <div className="flex-1 basis-[500px] min-w-[300px]">
+          <div className="flex gap-2 flex-wrap mb-5">
+            <Badge variant="phase" style={{ background: phase.bg, color: phase.color }}>{phase.label}</Badge>
+            <Badge variant="phase" style={{ background: fmt.bg, color: fmt.color }}>{formatMap[tool.format]}</Badge>
+            <Badge variant="phase" style={{ background: diff.bg, color: diff.color }}>{tool.difficulty}</Badge>
+            <span className="flex items-center gap-1 text-xs text-muted-foreground"><Clock size={14} />{tool.time}</span>
+            <span className="flex items-center gap-1 text-xs text-muted-foreground"><Users size={14} />{tool.team} pers.</span>
           </div>
-          <h1 style={{ fontSize: 'clamp(26px, 4vw, 38px)', fontWeight: 900, color: '#0B0B3B', marginBottom: 8, letterSpacing: -1 }}>{tool.subtitle}</h1>
-          <p style={{ fontSize: 16, color: '#64748B', lineHeight: 1.7, marginBottom: 36 }}>{tool.desc}</p>
+
+          <h1 className="text-[clamp(26px,4vw,38px)] font-black text-foreground mb-2 tracking-tight">{tool.subtitle}</h1>
+          <p className="text-base text-muted-foreground leading-relaxed mb-9">{tool.desc}</p>
 
           {/* When to use */}
-          <div style={{ background: '#F8FAFF', borderRadius: 16, padding: 24, marginBottom: 28, border: '1px solid #E8EDF5' }}>
-            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0B0B3B', marginBottom: 14 }}>Wanneer gebruik je dit?</h3>
+          <Card className="p-6 mb-7">
+            <h3 className="text-base font-bold text-foreground mb-3.5">Wanneer gebruik je dit?</h3>
             {tool.when.map((w, i) => (
-              <div key={i} style={{ display: 'flex', gap: 10, marginBottom: 10, alignItems: 'flex-start' }}>
-                <CheckCircle size={16} color="#10B981" style={{ marginTop: 2, flexShrink: 0 }} />
-                <span style={{ fontSize: 14, color: '#475569', lineHeight: 1.5 }}>{w}</span>
+              <div key={i} className="flex gap-2.5 mb-2.5 items-start">
+                <CheckCircle size={16} className="text-emerald-500 mt-0.5 shrink-0" />
+                <span className="text-sm text-muted-foreground leading-relaxed">{w}</span>
               </div>
             ))}
-          </div>
+          </Card>
 
           {/* How it works */}
-          <div style={{ marginBottom: 28 }}>
-            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0B0B3B', marginBottom: 14 }}>Hoe werkt het?</h3>
+          <div className="mb-7">
+            <h3 className="text-base font-bold text-foreground mb-3.5">Hoe werkt het?</h3>
             {tool.steps.map((s, i) => (
-              <div key={i} style={{ display: 'flex', gap: 12, marginBottom: 12, alignItems: 'flex-start' }}>
-                <div style={{ width: 24, height: 24, borderRadius: '50%', background: 'linear-gradient(135deg, #4361EE, #7B68EE)', color: '#fff', fontSize: 11, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{i + 1}</div>
-                <span style={{ fontSize: 14, color: '#475569', lineHeight: 1.55, paddingTop: 4 }}>{s}</span>
+              <div key={i} className="flex gap-3 mb-3 items-start">
+                <div className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-white text-[11px] font-bold"
+                  style={{ background: 'linear-gradient(135deg, #4057ff, #7B68EE)' }}>
+                  {i + 1}
+                </div>
+                <span className="text-sm text-muted-foreground leading-snug pt-0.5">{s}</span>
               </div>
             ))}
           </div>
 
           {/* Sections */}
-          <div style={{ marginBottom: 28 }}>
-            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0B0B3B', marginBottom: 14 }}>Wat vul je in?</h3>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+          <div className="mb-7">
+            <h3 className="text-base font-bold text-foreground mb-3.5">Wat vul je in?</h3>
+            <div className="flex flex-wrap gap-2">
               {tool.sections.map((s, i) => (
-                <span key={i} style={{ background: '#EEF2FF', color: '#4361EE', fontSize: 13, fontWeight: 600, padding: '6px 14px', borderRadius: 8 }}>{s}</span>
+                <span key={i} className="bg-secondary text-secondary-foreground text-[13px] font-semibold px-3.5 py-1.5 rounded-lg">
+                  {s}
+                </span>
               ))}
             </div>
           </div>
 
           {/* Example */}
-          <div style={{ background: '#FFFBF0', borderRadius: 16, padding: 24, marginBottom: 28, border: '1px solid #FDE68A' }}>
-            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0B0B3B', marginBottom: 10 }}>Voorbeeld</h3>
-            <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.65, margin: 0 }}>{tool.example}</p>
-          </div>
+          <Card className="p-6 mb-7 bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800/40">
+            <h3 className="text-base font-bold text-foreground mb-2.5">Voorbeeld</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{tool.example}</p>
+          </Card>
 
           {/* Tips */}
           <div>
-            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#0B0B3B', marginBottom: 14 }}>Tips</h3>
+            <h3 className="text-base font-bold text-foreground mb-3.5">Tips</h3>
             {tool.tips.map((t, i) => (
-              <div key={i} style={{ display: 'flex', gap: 10, marginBottom: 8, alignItems: 'flex-start' }}>
-                <span style={{ color: '#7B68EE', fontWeight: 700, flexShrink: 0 }}>·</span>
-                <span style={{ fontSize: 14, color: '#475569', lineHeight: 1.5 }}>{t}</span>
+              <div key={i} className="flex gap-2.5 mb-2 items-start">
+                <span className="text-primary font-bold shrink-0 leading-5">·</span>
+                <span className="text-sm text-muted-foreground leading-relaxed">{t}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Sidebar */}
-        <div style={{ flex: '0 1 320px', minWidth: 260 }}>
-          {/* Canvas preview */}
-          <div style={{ background: '#F8FAFF', borderRadius: 20, padding: 24, marginBottom: 20, border: '1px solid #E8EDF5' }}>
-            <div style={{ marginBottom: 16 }}>
+        <div className="flex-none w-[320px] min-w-[260px]">
+          <Card className="p-6 mb-5">
+            <div className="mb-4">
               <MockCanvas type={tool.id} />
             </div>
-            <div style={{ textAlign: 'center', marginBottom: 12 }}>
-              <p style={{ fontSize: 13, color: '#64748B', marginBottom: 12 }}>Gebruik deze tool direct op een interactief canvas.</p>
-            </div>
-            <button style={{
-              width: '100%',
-              background: 'linear-gradient(135deg, #4361EE, #7B68EE)',
-              border: 'none',
-              borderRadius: 10,
-              padding: '13px',
-              fontSize: 14,
-              fontWeight: 700,
-              color: '#fff',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 8,
-            }}>
+            <p className="text-[13px] text-muted-foreground text-center mb-3">
+              Gebruik deze tool direct op een interactief canvas.
+            </p>
+            <Button variant="gradient" size="lg" className="w-full">
               Open in YouLab <ArrowRight size={15} />
-            </button>
-          </div>
+            </Button>
+          </Card>
 
-          {/* Related tools */}
           {related.length > 0 && (
             <div>
-              <h3 style={{ fontSize: 15, fontWeight: 700, color: '#0B0B3B', marginBottom: 12 }}>Gerelateerde werkvormen</h3>
+              <h3 className="text-[15px] font-bold text-foreground mb-3">Gerelateerde werkvormen</h3>
               {related.map((r, i) => {
                 const rp = phases.find(p => p.id === r.phase);
                 return (
-                  <div key={i} style={{ background: '#fff', borderRadius: 12, padding: '14px 16px', border: '1px solid #E8EDF5', marginBottom: 8, cursor: 'pointer', transition: 'border-color 0.2s' }}
-                    onMouseEnter={e => e.currentTarget.style.borderColor = '#4361EE'}
-                    onMouseLeave={e => e.currentTarget.style.borderColor = '#E8EDF5'}
-                  >
-                    <Badge bg={rp.bg} color={rp.color}>{rp.label}</Badge>
-                    <div style={{ fontSize: 14, fontWeight: 600, color: '#0B0B3B', marginTop: 6 }}>{r.name}</div>
-                    <div style={{ fontSize: 12, color: '#64748B', marginTop: 2 }}>{r.subtitle}</div>
-                  </div>
+                  <Card key={i} className="p-4 mb-2 cursor-pointer hover:border-primary/40">
+                    <Badge variant="phase" style={{ background: rp.bg, color: rp.color }}>{rp.label}</Badge>
+                    <div className="text-sm font-semibold text-foreground mt-1.5">{r.name}</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">{r.subtitle}</div>
+                  </Card>
                 );
               })}
             </div>
@@ -196,7 +172,7 @@ export default function ToolboxPage({ navigate, initialToolId }) {
 
   if (selectedTool) {
     return (
-      <div style={{ paddingTop: 68 }}>
+      <div className="pt-[68px]">
         <ToolDetail tool={selectedTool} onBack={() => setSelectedTool(null)} />
         <Footer navigate={navigate} />
       </div>
@@ -204,67 +180,54 @@ export default function ToolboxPage({ navigate, initialToolId }) {
   }
 
   return (
-    <div style={{ paddingTop: 68 }}>
+    <div className="pt-[68px]">
       {/* Header */}
-      <section style={{ background: 'linear-gradient(135deg, #EDE4F7 0%, #EEF2FF 100%)', padding: '72px 0 60px', borderBottom: '1px solid #E8EDF5' }}>
-        <div style={{ maxWidth: 1120, margin: '0 auto', padding: '0 24px', textAlign: 'center' }}>
+      <section className="py-20 pb-16 border-b border-border"
+        style={{ background: 'linear-gradient(135deg, var(--secondary) 0%, var(--muted) 100%)' }}>
+        <div className="max-w-[1120px] mx-auto px-6 text-center">
           <PillBadge>Toolbox</PillBadge>
-          <h1 style={{ fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 900, color: '#0B0B3B', margin: '16px 0 16px', letterSpacing: -1.5 }}>
+          <h1 className="text-[clamp(32px,5vw,52px)] font-black text-foreground mt-4 mb-4 tracking-tight">
             Werkvormen & Tools
           </h1>
-          <p style={{ fontSize: 18, color: '#64748B', maxWidth: 560, margin: '0 auto', lineHeight: 1.6 }}>
+          <p className="text-lg text-muted-foreground max-w-[560px] mx-auto leading-relaxed">
             Kies op basis van wat je wilt bereiken, of filter op projectfase.
           </p>
         </div>
       </section>
 
-      {/* Filters */}
-      <section style={{ background: '#fff', borderBottom: '1px solid #F1F5F9', padding: '20px 0', position: 'sticky', top: 68, zIndex: 10 }}>
-        <div style={{ maxWidth: 1120, margin: '0 auto', padding: '0 24px' }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
-            <span style={{ fontSize: 13, fontWeight: 600, color: '#64748B', marginRight: 4 }}>Wat wil je bereiken?</span>
+      {/* Sticky filters */}
+      <section className="bg-card border-b border-border py-5 sticky top-[68px] z-10">
+        <div className="max-w-[1120px] mx-auto px-6">
+          <div className="flex flex-wrap gap-3 items-center">
+            <span className="text-[13px] font-semibold text-muted-foreground mr-1">Wat wil je bereiken?</span>
             {[{ id: 'all', label: 'Alles' }, ...goals].map(g => (
-              <button key={g.id} onClick={() => setGoalFilter(g.id)} style={{
-                background: goalFilter === g.id ? '#4361EE' : '#F1F5F9',
-                color: goalFilter === g.id ? '#fff' : '#475569',
-                border: 'none',
-                borderRadius: 8,
-                padding: '7px 14px',
-                fontSize: 13,
-                fontWeight: 600,
-                cursor: 'pointer',
-                transition: 'all 0.15s',
-              }}>{g.label}</button>
+              <FilterBtn key={g.id} active={goalFilter === g.id} onClick={() => setGoalFilter(g.id)}>
+                {g.label}
+              </FilterBtn>
             ))}
-            <div style={{ width: 1, height: 20, background: '#E2E8F0', margin: '0 4px' }} />
-            <span style={{ fontSize: 13, fontWeight: 600, color: '#64748B', marginRight: 4 }}>Projectfase</span>
-            {[{ id: 'all', label: 'Alle fases', color: '#4361EE', bg: '#EEF2FF' }, ...phases].map(p => (
-              <button key={p.id} onClick={() => setPhaseFilter(p.id)} style={{
-                background: phaseFilter === p.id ? (p.color || '#4361EE') : '#F1F5F9',
-                color: phaseFilter === p.id ? '#fff' : '#475569',
-                border: 'none',
-                borderRadius: 8,
-                padding: '7px 14px',
-                fontSize: 13,
-                fontWeight: 600,
-                cursor: 'pointer',
-                transition: 'all 0.15s',
-              }}>{p.label}</button>
+            <div className="w-px h-5 bg-border mx-1" />
+            <span className="text-[13px] font-semibold text-muted-foreground mr-1">Projectfase</span>
+            {[{ id: 'all', label: 'Alle fases', color: '#4057ff' }, ...phases].map(p => (
+              <FilterBtn key={p.id} active={phaseFilter === p.id} activeColor={p.color} onClick={() => setPhaseFilter(p.id)}>
+                {p.label}
+              </FilterBtn>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Grid */}
-      <section style={{ padding: '48px 0 80px' }}>
-        <div style={{ maxWidth: 1120, margin: '0 auto', padding: '0 24px' }}>
+      {/* Tool grid */}
+      <section className="py-12 pb-20">
+        <div className="max-w-[1120px] mx-auto px-6">
           {filtered.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '60px 0' }}>
-              <p style={{ fontSize: 16, color: '#94A3B8', marginBottom: 16 }}>Geen werkvormen gevonden.</p>
-              <button onClick={() => { setGoalFilter('all'); setPhaseFilter('all'); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#4361EE', fontWeight: 600, fontSize: 14 }}>Reset filters</button>
+            <div className="text-center py-16">
+              <p className="text-muted-foreground mb-4">Geen werkvormen gevonden.</p>
+              <Button variant="link" onClick={() => { setGoalFilter('all'); setPhaseFilter('all'); }}>
+                Reset filters
+              </Button>
             </div>
           ) : (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20 }}>
+            <div className="flex flex-wrap gap-5">
               {filtered.map(t => <ToolCard key={t.id} tool={t} onClick={() => setSelectedTool(t)} />)}
             </div>
           )}
@@ -273,5 +236,20 @@ export default function ToolboxPage({ navigate, initialToolId }) {
 
       <Footer navigate={navigate} />
     </div>
+  );
+}
+
+function FilterBtn({ children, active, onClick, activeColor }) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        'px-3.5 py-1.5 rounded-lg text-[13px] font-semibold border-0 cursor-pointer transition-all duration-150',
+        active ? 'text-white' : 'bg-muted text-muted-foreground hover:text-foreground'
+      )}
+      style={active ? { background: activeColor || 'var(--primary)' } : {}}
+    >
+      {children}
+    </button>
   );
 }

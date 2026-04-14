@@ -1,5 +1,7 @@
 import HeroSection from './HeroSection.jsx';
+import LogosSection from './LogosSection.jsx';
 import PainSection from './PainSection.jsx';
+import PainCallout from './PainCallout.jsx';
 import FeaturesSection from './FeaturesSection.jsx';
 import ApproachSection from './ApproachSection.jsx';
 import AudienceSection from './AudienceSection.jsx';
@@ -13,7 +15,9 @@ export default function HomePage({ navigate }) {
   return (
     <main style={{ paddingTop: 68 }}>
       <HeroSection navigate={navigate} />
+      <LogosSection />
       <PainSection />
+      <PainCallout />
       <FeaturesSection navigate={navigate} />
       <ApproachSection />
       <AudienceSection />
