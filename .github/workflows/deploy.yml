@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - claude/rebuild-youlab-website-Fvpbk
+      - staging
       - main
   workflow_dispatch:
 
