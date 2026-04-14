@@ -49,9 +49,6 @@ export default function Nav({ page, navigate, scrolled, dark, toggleDark }) {
           >
             Updates
           </NavBtn>
-          <NavBtn onClick={() => scrollToSection('pricing')}>
-            Prijzen
-          </NavBtn>
           <div style={{ width: 1, height: 20, background: '#E2E8F0', margin: '0 6px' }} />
           <a
             href="https://app.youlab.nl"
@@ -63,7 +60,7 @@ export default function Nav({ page, navigate, scrolled, dark, toggleDark }) {
           </a>
 
           <Button variant="gradient" size="sm" className="ml-1.5">
-            Plan een gratis demo <ArrowRight size={14} />
+            Ontdek YouLab <ArrowRight size={14} />
           </Button>
 
           {/* Dark mode toggle */}
@@ -114,12 +111,6 @@ export default function Nav({ page, navigate, scrolled, dark, toggleDark }) {
             >
               Updates
             </button>
-            <button
-              onClick={() => scrollToSection('pricing')}
-              className="w-full text-left px-4 py-3 rounded-xl text-base font-semibold border-0 cursor-pointer bg-transparent text-foreground hover:bg-accent transition-colors"
-            >
-              Prijzen
-            </button>
             <a
               href="https://app.youlab.nl"
               target="_blank"
@@ -129,7 +120,7 @@ export default function Nav({ page, navigate, scrolled, dark, toggleDark }) {
               Inloggen
             </a>
             <Button variant="gradient" size="lg" className="mt-3 w-full justify-center">
-              Plan een gratis demo <ArrowRight size={16} />
+              Ontdek YouLab <ArrowRight size={16} />
             </Button>
           </div>
         </div>

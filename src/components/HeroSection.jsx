@@ -1,4 +1,4 @@
-import { ArrowRight, ChevronRight, Star } from 'lucide-react';
+import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Button } from './ui/button.jsx';
 import { MockBoard, MockCanvas, MockChat } from './Mockups.jsx';
 
@@ -33,25 +33,13 @@ export default function HeroSection({ navigate }) {
           </p>
 
           {/* CTA buttons */}
-          <div className="flex flex-wrap gap-2 items-center justify-center mb-6">
-            <Button variant="gradient" size="lg">
-              Plan een gratis demo <ArrowRight size={16} />
+          <div className="flex flex-wrap gap-2 items-center justify-center mb-20">
+            <Button variant="gradient" size="lg" onClick={() => document.getElementById('aanpak')?.scrollIntoView({ behavior: 'smooth' })}>
+              Ontdek hoe het werkt <ArrowRight size={16} />
             </Button>
             <Button variant="secondary" size="lg" onClick={() => navigate('toolbox')}>
               Bekijk de toolbox <ChevronRight size={16} />
             </Button>
-          </div>
-
-          {/* Rating */}
-          <div className="flex items-center gap-2 mb-20">
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={14} className="fill-yellow-400 text-yellow-400" />
-              ))}
-            </div>
-            <span className="text-[13px] text-muted-foreground">
-              Beoordeeld met <strong className="text-foreground font-semibold">4.8/5</strong> · Geen account nodig
-            </span>
           </div>
         </div>
 

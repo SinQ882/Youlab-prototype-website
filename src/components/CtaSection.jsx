@@ -1,4 +1,4 @@
-import { ArrowRight, Shield, Users, BookOpen, Star } from 'lucide-react';
+import { ArrowRight, Shield, Users, BookOpen } from 'lucide-react';
 import { Button } from './ui/button.jsx';
 
 const trustItems = [
@@ -22,33 +22,29 @@ export default function CtaSection() {
         style={{ background: 'radial-gradient(circle, rgba(64,87,255,0.08) 0%, transparent 60%)' }} />
 
       <div className="max-w-[720px] mx-auto px-6 text-center relative">
-        {/* Rating */}
-        <div className="flex items-center justify-center gap-1.5 mb-6">
-          <div className="flex gap-0.5">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} size={16} className="fill-yellow-400 text-yellow-400" />
-            ))}
-          </div>
-          <span className="text-sm font-medium" style={{ color: 'rgba(255,255,255,0.45)' }}>
-            4.8/5 – vertrouwd door 500+ teams
-          </span>
-        </div>
-
         <h2 className="font-black mb-5 leading-none tracking-tight text-[clamp(30px,4.5vw,52px)]" style={{ color: '#fff' }}>
-          Benieuwd hoe{' '}
+          Klaar om te ontdekken wat{' '}
           <span className="bg-gradient-to-r from-primary to-[#7B68EE] bg-clip-text text-transparent">
             YouLab
           </span>
-          {' '}werkt?
+          {' '}mogelijk maakt?
         </h2>
 
         <p className="text-lg mb-11 leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
-          Plan een demo van 30 minuten. Geen account nodig, geen verplichtingen.
+          Bekijk een voorbeeldproject en zie hoe teams werken aan vraagstukken die er écht toe doen.
         </p>
 
-        <Button variant="gradient" size="xl" className="mb-12">
-          Plan een gratis demo <ArrowRight size={18} />
-        </Button>
+        <div className="flex flex-wrap gap-4 justify-center mb-12">
+          <Button variant="gradient" size="xl">
+            Start met ontdekken <ArrowRight size={18} />
+          </Button>
+          <Button
+            size="xl"
+            className="border border-white/20 text-white bg-white/10 hover:bg-white/20"
+          >
+            Liever eerst praten? Plan een vrijblijvend gesprek
+          </Button>
+        </div>
 
         <div className="flex justify-center flex-wrap gap-x-8 gap-y-3">
           {trustItems.map(({ Icon, text }, i) => (
