@@ -14,7 +14,7 @@ export default function HomePage({ navigate }) {
       <HeroSection navigate={navigate} />
       <LogosSection />
       <ImpactSection />
-      <ApproachSection />
+      <ApproachSection navigate={navigate} />
       <FeaturesSection navigate={navigate} />
       {/* AudienceSection wordt vervangen door ScenarioSection in stap 6 */}
       <AudienceSection />
