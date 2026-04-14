@@ -107,7 +107,12 @@ export default function Nav({ page, navigate, scrolled, dark, toggleDark }) {
             </button>
             <button
               onClick={() => { navigate('updates'); setMenuOpen(false); }}
-              style={{ background: (page === 'updates' || page === 'update-detail') ? '#EEF2FF' : 'none', border: 'none', cursor: 'pointer', padding: '12px 14px', borderRadius: 10, fontSize: 16, fontWeight: 600, color: (page === 'updates' || page === 'update-detail') ? C.blue : C.navy, textAlign: 'left' }}
+              className={cn(
+                'w-full text-left px-4 py-3 rounded-xl text-base font-semibold border-0 cursor-pointer transition-colors',
+                (page === 'updates' || page === 'update-detail')
+                  ? 'bg-accent text-accent-foreground'
+                  : 'bg-transparent text-foreground hover:bg-accent'
+              )}
             >
               Updates
             </button>
