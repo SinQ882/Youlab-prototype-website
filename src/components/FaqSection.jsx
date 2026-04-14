@@ -4,11 +4,30 @@ import { Section, PillBadge } from './ui.jsx';
 import { cn } from '../lib/utils.js';
 
 const faqs = [
-  { q: 'Kan ik YouLab eerst uitproberen?',     a: 'Ja! Plan een gratis demo van 30 minuten. We laten je zien hoe het platform werkt en beantwoorden al je vragen. Geen account nodig, geen verplichtingen.' },
-  { q: 'Wat kost YouLab?',                     a: 'Standaard €15/gebruiker/maand, Onderwijs €10/gebruiker/maand. Externe experts werken altijd gratis mee. Zo betaal je alleen voor je eigen teamleden.' },
-  { q: 'Moeten alle teamleden betalen?',        a: 'Nee. Externe experts (zoals partners, stakeholders of adviseurs) werken gratis mee. Alleen je eigen interne teamleden hebben een betaalde licentie nodig.' },
-  { q: 'Hoe snel kan ik starten?',             a: 'Binnen een dag ben je operationeel. Er is niets te installeren. Je maakt een account aan, maakt een project aan en nodigt je team uit.' },
-  { q: 'Is onze data veilig?',                 a: 'Ja. YouLab is AVG-compliant, data wordt opgeslagen in de EU en je kunt gebruikers beheren met duidelijke rollen en rechten.' },
+  {
+    q: 'Voor welk type projecten is YouLab geschikt?',
+    a: 'YouLab werkt goed voor vraagstukken waarbij meerdere partijen betrokken zijn en waarbij je stap voor stap wil werken: participatietrajecten bij gemeenten, verbeterprojecten bij MKB, challenges en onderzoeksprojecten in het onderwijs, en innovatievraagstukken bij organisaties die samen willen ontdekken en ontwikkelen.',
+  },
+  {
+    q: 'Hoe verschilt YouLab van tools als Trello of Miro?',
+    a: 'Trello organiseert taken, Miro visualiseert ideeën — maar geen van beide begeleidt je door het vraagstuk. YouLab combineert projectmanagement met inhoudelijke werkvormen (zoals Empathy Map, Systeemmap en Prototype Canvas) en een bewezen aanpak in vier stappen. Je hebt niet alleen een bord, maar ook een methode.',
+  },
+  {
+    q: 'Kunnen externe partners gratis meewerken?',
+    a: 'Ja, altijd. Externe experts — denk aan een woningcorporatie, freelance adviseur of stakeholder — werken gratis mee als Expert. Ze kunnen meewerken aan werkvormen, taken bijdragen en berichten sturen. Ze beheren geen projecten en hebben geen betaalde licentie nodig.',
+  },
+  {
+    q: 'Hoe snel kan ik starten?',
+    a: 'Binnen een dag ben je operationeel. Er is niets te installeren — YouLab draait volledig in de browser. Je maakt een account aan, maakt een project aan en nodigt je team uit.',
+  },
+  {
+    q: 'Is onze data veilig?',
+    a: 'Ja. YouLab is AVG-compliant, data wordt opgeslagen in de EU en je kunt gebruikers beheren met duidelijke rollen en rechten.',
+  },
+  {
+    q: 'Wat kost YouLab?',
+    a: 'Vanaf €10/gebruiker/maand (onderwijs- en sociaal tarief). Externe experts werken altijd gratis mee. Neem contact op voor een persoonlijk aanbod dat past bij jouw organisatie.',
+  },
 ];
 
 export default function FaqSection() {
