@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - claude/rebuild-youlab-website-Fvpbk
+      - claude/execute-brief-steps-Wejma
       - main
   workflow_dispatch:
 
@@ -29,8 +30,9 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy to gh-pages branch
+      - name: Deploy to staging branch
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          publish_branch: staging
