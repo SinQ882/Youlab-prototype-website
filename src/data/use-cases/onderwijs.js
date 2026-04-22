@@ -51,7 +51,7 @@ export default {
     toolSlugs: ['5w1h', 'customer-journey', 'prototype-canvas', 'actieplan'],
   },
 
-  storySlug: null,
+  storySlug: 'noordwijk-onderzoeksgroep',
 
   faq: [
     {
