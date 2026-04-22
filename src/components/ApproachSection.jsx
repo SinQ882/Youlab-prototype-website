@@ -1,11 +1,12 @@
-import { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import { useState, useRef } from 'react';
 
 const steps = [
   {
     n: '01',
     title: 'Ontmoeten',
     subtitle: 'Wie zijn erbij betrokken?',
-    desc: 'Breng alle betrokkenen bij elkaar en verken het vraagstuk. Wie zijn de stakeholders? Wat speelt er precies? Wat zijn de kansen en beperkingen van dit project?',
+    desc: 'Breng alle betrokkenen bij elkaar en verken het vraagstuk. Wie zijn de stakeholders? Wat speelt er precies? Wat zijn de kansen en beperkingen?',
+    example: 'Een gemeente nodigt bewoners, woningcorporatie en welzijnswerk uit. Via de Stakeholderanalyse wordt meteen duidelijk wie welke belangen heeft — en wie er tot dan toe ontbrak.',
     emoji: '🤝',
     color: '#4057ff',
     bg: 'rgba(64,87,255,0.10)',
@@ -16,6 +17,7 @@ const steps = [
     title: 'Ontdekken',
     subtitle: 'Wat is er echt aan de hand?',
     desc: 'Onderzoek de situatie in de diepte en vind de echte oorzaken. Interviews, empathie en systeemdenken staan centraal. Voorkom dat je het verkeerde probleem oplost.',
+    example: 'Via de Empathy Map ontdekte een onderwijsteam dat studenten niet gebrek aan motivatie hadden, maar gebrek aan overzicht. Dat inzicht veranderde de hele aanpak.',
     emoji: '🔍',
     color: '#F59E0B',
     bg: 'rgba(245,158,11,0.12)',
@@ -26,6 +28,7 @@ const steps = [
     title: 'Ontwikkelen',
     subtitle: 'Wat kan de oplossing zijn?',
     desc: 'Genereer ideeën, bouw prototypes en test ze met echte gebruikers. Van ruwe schets naar geconcretiseerd en gevalideerd concept dat echt werkt in de praktijk.',
+    example: 'Een MKB-team bedacht in een ideeënsessie 14 mogelijke oplossingen. Het Prototype Canvas hielp hen de drie meest kansrijke te kiezen en snel te testen.',
     emoji: '💡',
     color: '#10B981',
     bg: 'rgba(16,185,129,0.10)',
@@ -35,7 +38,8 @@ const steps = [
     n: '04',
     title: 'Organiseren',
     subtitle: 'Hoe voeren we het uit?',
-    desc: 'Vertaal het concept naar een concreet uitvoeringsplan. Taken, verantwoordelijken, mijlpalen en deadlines — allemaal op één plek in YouLab, zodat niets verloren gaat.',
+    desc: 'Vertaal het concept naar een concreet uitvoeringsplan. Taken, verantwoordelijken, mijlpalen en deadlines — allemaal op één plek, zodat niets verloren gaat.',
+    example: 'Dankzij het Actieplan in YouLab wist elk teamlid precies wat er van hen verwacht werd. Geen losse e-mails meer, geen vergeten acties — het project liep op schema.',
     emoji: '🚀',
     color: '#EF4444',
     bg: 'rgba(239,68,68,0.10)',
@@ -43,35 +47,35 @@ const steps = [
   },
 ];
 
-function StepCard({ step, height }) {
+function StepCard({ step, navigate }) {
   return (
     <div style={{
       background: 'var(--card)',
-      borderRadius: 24,
-      padding: 'clamp(22px,3vw,36px)',
-      height: height || 'auto',
+      borderRadius: 20,
+      padding: 'clamp(20px,2.5vw,32px)',
       display: 'flex',
       flexDirection: 'column',
-      boxShadow: '0 24px 64px rgba(0,0,0,0.28), 0 4px 16px rgba(0,0,0,0.12)',
+      gap: 14,
       borderTop: `4px solid ${step.color}`,
       position: 'relative',
       overflow: 'hidden',
       color: 'var(--card-foreground)',
+      height: '100%',
     }}>
       {/* Ghost number */}
       <div style={{
-        position: 'absolute', right: 16, bottom: 8,
-        fontSize: 110, fontWeight: 900, color: step.color,
-        opacity: 0.065, lineHeight: 1, pointerEvents: 'none', userSelect: 'none',
+        position: 'absolute', right: 12, bottom: 4,
+        fontSize: 96, fontWeight: 900, color: step.color,
+        opacity: 0.06, lineHeight: 1, pointerEvents: 'none', userSelect: 'none',
       }}>
         {step.n}
       </div>
 
       {/* Icon + phase */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <div style={{
-          width: 50, height: 50, borderRadius: 14,
-          background: step.bg, fontSize: 22,
+          width: 46, height: 46, borderRadius: 12,
+          background: step.bg, fontSize: 20,
           display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
         }}>
           {step.emoji}
@@ -79,7 +83,7 @@ function StepCard({ step, height }) {
         <div>
           <span style={{
             display: 'inline-block', background: step.bg, color: step.color,
-            fontSize: 11, fontWeight: 700, padding: '3px 9px', borderRadius: 6, marginBottom: 3,
+            fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 6, marginBottom: 2,
           }}>
             Fase {step.n}
           </span>
@@ -89,27 +93,51 @@ function StepCard({ step, height }) {
         </div>
       </div>
 
-      <h3 style={{ fontSize: 'clamp(20px,2.5vw,26px)', fontWeight: 800, color: 'var(--card-foreground)', marginBottom: 10, letterSpacing: -0.5 }}>
+      <h3 style={{ fontSize: 'clamp(18px,2vw,22px)', fontWeight: 800, color: 'var(--card-foreground)', letterSpacing: -0.4, margin: 0 }}>
         {step.title}
       </h3>
-      <p style={{ fontSize: 14, color: 'var(--muted-foreground)', lineHeight: 1.7, flex: 1 }}>
+      <p style={{ fontSize: 14, color: 'var(--muted-foreground)', lineHeight: 1.7, margin: 0 }}>
         {step.desc}
       </p>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7, marginTop: 18 }}>
+      {/* Mini-voorbeeld */}
+      <div style={{
+        background: step.bg,
+        borderRadius: 10,
+        padding: '10px 14px',
+        borderLeft: `3px solid ${step.color}`,
+      }}>
+        <p style={{ fontSize: 13, color: 'var(--foreground)', lineHeight: 1.65, margin: 0 }}>
+          {step.example}
+        </p>
+      </div>
+
+      {/* Tool-tags — klikbaar naar toolbox */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 'auto', paddingTop: 4 }}>
         {step.tools.map((tool, j) => (
-          <span key={j} style={{ background: step.bg, color: step.color, fontSize: 12, fontWeight: 600, padding: '4px 10px', borderRadius: 8 }}>
+          <button
+            key={j}
+            onClick={() => navigate && navigate('toolbox')}
+            style={{
+              background: step.bg, color: step.color,
+              fontSize: 12, fontWeight: 600, padding: '4px 10px', borderRadius: 8,
+              border: 'none', cursor: navigate ? 'pointer' : 'default',
+              transition: 'opacity 0.15s',
+            }}
+            onMouseEnter={e => { if (navigate) e.target.style.opacity = '0.7'; }}
+            onMouseLeave={e => { e.target.style.opacity = '1'; }}
+          >
             {tool}
-          </span>
+          </button>
         ))}
       </div>
     </div>
   );
 }
 
-function SectionHeader({ hint }) {
+function SectionHeader() {
   return (
-    <div style={{ textAlign: 'center', padding: 'clamp(28px,4.5vh,52px) 24px 20px' }}>
+    <div style={{ textAlign: 'center', paddingBottom: 40 }}>
       <span style={{
         background: 'rgba(64,87,255,0.18)', color: '#8B9CF4',
         fontSize: 13, fontWeight: 600, padding: '6px 16px', borderRadius: 100,
@@ -117,122 +145,45 @@ function SectionHeader({ hint }) {
       }}>
         De aanpak
       </span>
-      <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, color: '#fff', marginTop: 12, marginBottom: 6, letterSpacing: -0.8, lineHeight: 1.15 }}>
+      <h2 style={{ fontSize: 'clamp(22px,3vw,34px)', fontWeight: 800, color: '#fff', marginTop: 12, marginBottom: 8, letterSpacing: -0.8, lineHeight: 1.15 }}>
         Een bewezen aanpak in vier stappen
       </h2>
-      <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', letterSpacing: 0.4 }}>{hint}</p>
+      <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.45)', maxWidth: 500, margin: '0 auto', lineHeight: 1.65 }}>
+        Van vraagstuk verkennen tot uitvoerbaar plan. Klik op een werkvorm om te zien wat erin zit.
+      </p>
     </div>
   );
 }
 
-function DesktopTrack() {
-  const wrapperRef = useRef(null);
-  const trackRef   = useRef(null);
-  const dotsRef    = useRef(null);
-  const barFillRef = useRef(null);
-  const rafRef     = useRef(null);
-
-  function updateLayout() {
-    const wrapper = wrapperRef.current;
-    const track   = trackRef.current;
-    if (!wrapper || !track) return;
-    const maxTranslate = Math.max(0, track.scrollWidth - window.innerWidth);
-    wrapper.style.height = `${window.innerHeight + maxTranslate}px`;
-  }
-
-  function updateScroll() {
-    const wrapper = wrapperRef.current;
-    const track   = trackRef.current;
-    const dotsEl  = dotsRef.current;
-    const barFill = barFillRef.current;
-    if (!wrapper || !track) return;
-    const rect           = wrapper.getBoundingClientRect();
-    const totalScrollable = wrapper.offsetHeight - window.innerHeight;
-    const scrolled       = Math.max(0, -rect.top);
-    const progress       = totalScrollable > 0 ? Math.min(1, scrolled / totalScrollable) : 0;
-    const maxTranslate   = Math.max(0, track.scrollWidth - window.innerWidth);
-    track.style.transform = `translateX(${-progress * maxTranslate}px)`;
-    if (barFill) barFill.style.transform = `scaleX(${progress})`;
-    if (dotsEl) {
-      const activeIdx = Math.round(progress * (steps.length - 1));
-      Array.from(dotsEl.children).forEach((dot, i) => {
-        const active = i === activeIdx;
-        dot.style.background = active ? '#fff' : 'rgba(255,255,255,0.22)';
-        dot.style.width      = active ? '26px' : '8px';
-      });
-    }
-  }
-
-  useLayoutEffect(() => { updateLayout(); }, []);
-
-  useEffect(() => {
-    updateScroll();
-    function onScroll() {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(updateScroll);
-    }
-    function onResize() { updateLayout(); updateScroll(); }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onResize);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onResize);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
+function DesktopGrid({ navigate }) {
   return (
-    <div ref={wrapperRef} style={{ position: 'relative' }}>
-      <div style={{
-        position: 'sticky', top: 0, height: '100vh', overflow: 'hidden',
-        background: 'linear-gradient(160deg, #060a1a 0%, #0b0f2a 55%, #111535 100%)',
-        display: 'flex', flexDirection: 'column',
-      }}>
-        <div style={{ position: 'absolute', top: '15%', right: '-8%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(64,87,255,0.14) 0%, transparent 65%)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', bottom: '10%', left: '-5%', width: 350, height: 350, borderRadius: '50%', background: 'radial-gradient(circle, rgba(123,104,238,0.10) 0%, transparent 65%)', pointerEvents: 'none' }} />
+    <section style={{
+      background: 'linear-gradient(160deg, #060a1a 0%, #0b0f2a 55%, #111535 100%)',
+      padding: 'clamp(48px,8vh,80px) clamp(20px,5vw,80px)',
+    }}>
+      {/* Ambient glows */}
+      <div style={{ position: 'relative' }}>
+        <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(64,87,255,0.14) 0%, transparent 65%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: '-10%', left: '-5%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(123,104,238,0.10) 0%, transparent 65%)', pointerEvents: 'none' }} />
 
-        <SectionHeader hint="Scroll verder om alle stappen te ontdekken →" />
-
-        <div ref={trackRef} style={{
-          display: 'flex', gap: 20,
-          paddingLeft:  'calc((100vw - min(500px, 82vw)) / 2)',
-          paddingRight: 'calc((100vw - min(500px, 82vw)) / 2)',
-          flex: 1, alignItems: 'center', paddingBottom: 8, willChange: 'transform',
-        }}>
-          {steps.map((step, i) => (
-            <div key={i} style={{ width: 'min(500px, 82vw)', flexShrink: 0 }}>
-              <StepCard step={step} height="clamp(300px,50vh,420px)" />
-            </div>
-          ))}
-        </div>
-
-        {/* Dots */}
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '12px 24px 14px', flexShrink: 0 }}>
-          <div ref={dotsRef} style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-            {steps.map((_, i) => (
-              <div key={i} style={{
-                height: 8, width: i === 0 ? 26 : 8, borderRadius: 100,
-                background: i === 0 ? '#fff' : 'rgba(255,255,255,0.22)',
-                transition: 'width 0.3s ease, background 0.3s ease', flexShrink: 0,
-              }} />
+        <div style={{ maxWidth: 1120, margin: '0 auto', position: 'relative' }}>
+          <SectionHeader />
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: 20,
+          }}>
+            {steps.map((step, i) => (
+              <StepCard key={i} step={step} navigate={navigate} />
             ))}
           </div>
         </div>
-
-        {/* Progress bar */}
-        <div style={{ height: 3, background: 'rgba(255,255,255,0.07)', flexShrink: 0 }}>
-          <div ref={barFillRef} style={{
-            height: '100%',
-            background: 'linear-gradient(90deg, #4057ff, #7B68EE, #a855f7)',
-            transformOrigin: 'left center', transform: 'scaleX(0)',
-          }} />
-        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
-function MobileSwiper() {
+function MobileSwiper({ navigate }) {
   const [activeIdx, setActiveIdx] = useState(0);
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
@@ -255,13 +206,15 @@ function MobileSwiper() {
   }
 
   return (
-    <section style={{ background: 'linear-gradient(160deg, #060a1a 0%, #0b0f2a 55%, #111535 100%)', paddingBottom: 48 }}>
-      <SectionHeader hint="Swipe om alle stappen te ontdekken →" />
+    <section style={{ background: 'linear-gradient(160deg, #060a1a 0%, #0b0f2a 55%, #111535 100%)', paddingBottom: 48, paddingTop: 48 }}>
+      <div style={{ padding: '0 20px' }}>
+        <SectionHeader />
+      </div>
       <div style={{ overflow: 'hidden' }} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
         <div style={{ display: 'flex', transform: `translateX(${-activeIdx * 100}vw)`, transition: 'transform 0.38s cubic-bezier(0.25,0.46,0.45,0.94)', willChange: 'transform' }}>
           {steps.map((step, i) => (
             <div key={i} style={{ width: '100vw', flexShrink: 0, padding: '4px 20px 12px' }}>
-              <StepCard step={step} />
+              <StepCard step={step} navigate={navigate} />
             </div>
           ))}
         </div>
@@ -285,11 +238,11 @@ function MobileSwiper() {
   );
 }
 
-export default function ApproachSection() {
+export default function ApproachSection({ navigate }) {
   return (
     <div id="aanpak">
-      <div className="approach-desktop"><DesktopTrack /></div>
-      <div className="approach-mobile"><MobileSwiper /></div>
+      <div className="approach-desktop"><DesktopGrid navigate={navigate} /></div>
+      <div className="approach-mobile"><MobileSwiper navigate={navigate} /></div>
     </div>
   );
 }

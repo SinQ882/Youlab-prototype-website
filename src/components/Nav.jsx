@@ -1,20 +1,32 @@
-import { useState } from 'react';
-import { Menu, X, ArrowRight, Moon, Sun } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, Moon, Sun, ChevronDown } from 'lucide-react';
 import { Button } from './ui/button.jsx';
 import { cn } from '../lib/utils.js';
 
-export default function Nav({ page, navigate, scrolled, dark, toggleDark }) {
-  const [menuOpen, setMenuOpen] = useState(false);
+const sectors = [
+  { label: 'Gemeenten',     slug: 'gemeenten' },
+  { label: 'Onderwijs',     slug: 'onderwijs' },
+  { label: 'MKB',           slug: 'mkb' },
+  { label: 'Non-profit',    slug: 'non-profit' },
+  { label: 'Adviesbureaus', slug: 'adviesbureaus' },
+];
 
-  function scrollToSection(id) {
-    setMenuOpen(false);
-    if (page !== 'home') {
-      navigate('home');
-      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 100);
-    } else {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+export default function Nav({ scrolled, dark, toggleDark }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [dropOpen, setDropOpen] = useState(false);
+  const dropRef  = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => { setMenuOpen(false); setDropOpen(false); }, [location.pathname]);
+
+  useEffect(() => {
+    function onClickOutside(e) {
+      if (dropRef.current && !dropRef.current.contains(e.target)) setDropOpen(false);
     }
-  }
+    document.addEventListener('mousedown', onClickOutside);
+    return () => document.removeEventListener('mousedown', onClickOutside);
+  }, []);
 
   return (
     <header
@@ -27,46 +39,61 @@ export default function Nav({ page, navigate, scrolled, dark, toggleDark }) {
     >
       <div className="max-w-[1120px] mx-auto px-6 h-[68px] flex items-center justify-between">
         {/* Logo */}
-        <button
-          onClick={() => navigate('home')}
-          className="flex items-center gap-2.5 bg-transparent border-0 cursor-pointer py-1"
-        >
-          <img src="./youlab-icon.svg" alt="YouLab icon" width={32} height={32} />
+        <Link to="/" className="flex items-center gap-2.5 no-underline py-1">
+          <img src="./youlab-icon.svg" alt="YouLab" width={32} height={32} />
           <span className="text-xl font-extrabold text-primary tracking-tight">YouLab</span>
-        </button>
+        </Link>
 
         {/* Desktop nav */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: 2 }} className="desktop-nav">
-          <NavBtn
-            active={page === 'toolbox'}
-            onClick={() => navigate('toolbox')}
-          >
-            Toolbox
-          </NavBtn>
-          <NavBtn
-            active={page === 'updates' || page === 'update-detail'}
-            onClick={() => navigate('updates')}
-          >
-            Updates
-          </NavBtn>
-          <NavBtn onClick={() => scrollToSection('pricing')}>
-            Prijzen
-          </NavBtn>
-          <div style={{ width: 1, height: 20, background: '#E2E8F0', margin: '0 6px' }} />
-          <a
-            href="https://app.youlab.nl"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-4 py-2 rounded-lg text-sm font-semibold text-foreground no-underline transition-all duration-150 hover:bg-accent hover:text-accent-foreground"
-          >
-            Inloggen
-          </a>
+        <nav className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <NavLink to="/hoe-werkt-het">Hoe werkt het</NavLink>
 
-          <Button variant="gradient" size="sm" className="ml-1.5">
-            Plan een gratis demo <ArrowRight size={14} />
+          {/* Voor wie dropdown */}
+          <div ref={dropRef} style={{ position: 'relative' }}>
+            <button
+              onClick={() => setDropOpen(o => !o)}
+              className={cn(
+                'flex items-center gap-1 px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-150 border-0 cursor-pointer',
+                location.pathname.startsWith('/voor/')
+                  ? 'bg-accent text-accent-foreground'
+                  : 'bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground'
+              )}
+            >
+              Voor wie
+              <ChevronDown
+                size={14}
+                style={{ transform: dropOpen ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}
+              />
+            </button>
+
+            {dropOpen && (
+              <div
+                className="absolute top-[calc(100%+8px)] left-0 bg-card border border-border rounded-xl shadow-lg py-1.5 min-w-[180px]"
+                style={{ zIndex: 100 }}
+              >
+                {sectors.map(s => (
+                  <Link
+                    key={s.slug}
+                    to={`/voor/${s.slug}`}
+                    className="block px-4 py-2.5 text-sm font-medium text-foreground no-underline hover:bg-accent hover:text-accent-foreground transition-colors rounded-lg mx-1"
+                  >
+                    {s.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <NavLink to="/verhalen">Verhalen</NavLink>
+          <NavLink to="/toolbox">Toolbox</NavLink>
+          <NavLink to="/updates">Updates</NavLink>
+
+          <div style={{ width: 1, height: 20, background: 'var(--border)', margin: '0 8px' }} />
+
+          <Button variant="gradient" size="sm" asChild>
+            <Link to="/kennismaken" className="no-underline">Kennismaken</Link>
           </Button>
 
-          {/* Dark mode toggle */}
           <button
             onClick={toggleDark}
             className="ml-2 p-2 rounded-lg bg-transparent border-0 cursor-pointer text-muted-foreground hover:bg-accent hover:text-foreground transition-colors duration-150"
@@ -97,39 +124,37 @@ export default function Nav({ page, navigate, scrolled, dark, toggleDark }) {
       {menuOpen && (
         <div className="bg-card border-t border-border px-6 pb-6 pt-4 shadow-lg">
           <div className="flex flex-col gap-1">
-            <button
-              onClick={() => { navigate('toolbox'); setMenuOpen(false); }}
-              className={cn(
-                'w-full text-left px-4 py-3 rounded-xl text-base font-semibold border-0 cursor-pointer transition-colors',
-                page === 'toolbox'
-                  ? 'bg-accent text-accent-foreground'
-                  : 'bg-transparent text-foreground hover:bg-accent'
+            <MobileNavLink to="/hoe-werkt-het">Hoe werkt het</MobileNavLink>
+
+            <div>
+              <button
+                onClick={() => setDropOpen(o => !o)}
+                className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-base font-semibold border-0 cursor-pointer transition-colors bg-transparent text-foreground hover:bg-accent"
+              >
+                Voor wie
+                <ChevronDown size={16} style={{ transform: dropOpen ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }} />
+              </button>
+              {dropOpen && (
+                <div className="pl-4 flex flex-col gap-0.5 mt-1">
+                  {sectors.map(s => (
+                    <Link
+                      key={s.slug}
+                      to={`/voor/${s.slug}`}
+                      className="block px-4 py-2.5 rounded-xl text-sm font-medium text-muted-foreground no-underline hover:bg-accent hover:text-foreground transition-colors"
+                    >
+                      {s.label}
+                    </Link>
+                  ))}
+                </div>
               )}
-            >
-              Toolbox
-            </button>
-            <button
-              onClick={() => { navigate('updates'); setMenuOpen(false); }}
-              style={{ background: (page === 'updates' || page === 'update-detail') ? '#EEF2FF' : 'none', border: 'none', cursor: 'pointer', padding: '12px 14px', borderRadius: 10, fontSize: 16, fontWeight: 600, color: (page === 'updates' || page === 'update-detail') ? C.blue : C.navy, textAlign: 'left' }}
-            >
-              Updates
-            </button>
-            <button
-              onClick={() => scrollToSection('pricing')}
-              className="w-full text-left px-4 py-3 rounded-xl text-base font-semibold border-0 cursor-pointer bg-transparent text-foreground hover:bg-accent transition-colors"
-            >
-              Prijzen
-            </button>
-            <a
-              href="https://app.youlab.nl"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block px-4 py-3 rounded-xl text-base font-semibold text-foreground no-underline hover:bg-accent transition-colors"
-            >
-              Inloggen
-            </a>
-            <Button variant="gradient" size="lg" className="mt-3 w-full justify-center">
-              Plan een gratis demo <ArrowRight size={16} />
+            </div>
+
+            <MobileNavLink to="/verhalen">Verhalen</MobileNavLink>
+            <MobileNavLink to="/toolbox">Toolbox</MobileNavLink>
+            <MobileNavLink to="/updates">Updates</MobileNavLink>
+
+            <Button variant="gradient" size="lg" className="mt-3 w-full justify-center" asChild>
+              <Link to="/kennismaken" className="no-underline">Kennismaken</Link>
             </Button>
           </div>
         </div>
@@ -138,18 +163,36 @@ export default function Nav({ page, navigate, scrolled, dark, toggleDark }) {
   );
 }
 
-function NavBtn({ children, onClick, active }) {
+function NavLink({ to, children }) {
+  const location = useLocation();
+  const active = location.pathname === to;
   return (
-    <button
-      onClick={onClick}
+    <Link
+      to={to}
       className={cn(
-        'px-3.5 py-2 rounded-lg text-sm font-semibold border-0 cursor-pointer transition-all duration-150',
+        'px-3.5 py-2 rounded-lg text-sm font-semibold no-underline transition-all duration-150',
         active
           ? 'bg-accent text-accent-foreground'
-          : 'bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground'
+          : 'text-foreground hover:bg-accent hover:text-accent-foreground'
       )}
     >
       {children}
-    </button>
+    </Link>
+  );
+}
+
+function MobileNavLink({ to, children }) {
+  const location = useLocation();
+  const active = location.pathname === to;
+  return (
+    <Link
+      to={to}
+      className={cn(
+        'block px-4 py-3 rounded-xl text-base font-semibold no-underline transition-colors',
+        active ? 'bg-accent text-accent-foreground' : 'text-foreground hover:bg-accent'
+      )}
+    >
+      {children}
+    </Link>
   );
 }

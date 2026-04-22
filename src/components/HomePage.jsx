@@ -1,31 +1,27 @@
 import HeroSection from './HeroSection.jsx';
-import LogosSection from './LogosSection.jsx';
-import PainSection from './PainSection.jsx';
-import PainCallout from './PainCallout.jsx';
-import FeaturesSection from './FeaturesSection.jsx';
-import ApproachSection from './ApproachSection.jsx';
-import AudienceSection from './AudienceSection.jsx';
-import PricingSection from './PricingSection.jsx';
-import AiSection from './AiSection.jsx';
-import FaqSection from './FaqSection.jsx';
-import CtaSection from './CtaSection.jsx';
+import PijlersSection from './PijlersSection.jsx';
+import ImpactSection from './ImpactSection.jsx';
+import AanpakSection from './AanpakSection.jsx';
+import ScenarioGuide from './ScenarioGuide.jsx';
+import AudienceRouter from './AudienceRouter.jsx';
+import PartnersSection from './PartnersSection.jsx';
+import StoryTeaser from './StoryTeaser.jsx';
+import ClosingCta from './ClosingCta.jsx';
 import Footer from './Footer.jsx';
 
-export default function HomePage({ navigate }) {
+export default function HomePage() {
   return (
     <main style={{ paddingTop: 68 }}>
-      <HeroSection navigate={navigate} />
-      <LogosSection />
-      <PainSection />
-      <PainCallout />
-      <FeaturesSection navigate={navigate} />
-      <ApproachSection />
-      <AudienceSection />
-      <PricingSection />
-      <AiSection />
-      <FaqSection />
-      <CtaSection />
-      <Footer navigate={navigate} />
+      <HeroSection />
+      <PijlersSection />
+      <ImpactSection />
+      <AanpakSection />
+      <ScenarioGuide />
+      <AudienceRouter />
+      <PartnersSection />
+      <StoryTeaser />
+      <ClosingCta />
+      <Footer />
     </main>
   );
 }

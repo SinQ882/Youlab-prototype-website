@@ -1,9 +1,16 @@
 import { useState, useEffect, Component } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Nav from './components/Nav';
 import HomePage from './components/HomePage';
 import ToolboxPage from './components/ToolboxPage';
 import UpdatesPage from './components/UpdatesPage';
 import UpdateDetailPage from './components/UpdateDetailPage';
+import AnimatedBackground from './components/AnimatedBackground';
+import HoeWerktHetPage from './pages/HoeWerktHetPage';
+import VoorSectorPage from './pages/VoorSectorPage';
+import VerhalenPage from './pages/VerhalenPage';
+import VerhaalDetailPage from './pages/VerhaalDetailPage';
+import KennismakenPage from './pages/KennismakenPage';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -38,18 +45,15 @@ class ErrorBoundary extends Component {
   }
 }
 
-export default function App() {
-  const [page, setPage] = useState('home');
-  const [toolId, setToolId] = useState(null);
-  const [scrolled, setScrolled] = useState(false);
-  const [dark, setDark] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    const stored = localStorage.getItem('theme');
-    if (stored) return stored === 'dark';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
 
-  // Apply / remove .dark class on <html>
+function AppLayout({ dark, setDark }) {
+  const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark);
     localStorage.setItem('theme', dark ? 'dark' : 'light');
@@ -61,23 +65,87 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  return (
+    <div className="min-h-screen bg-background text-foreground font-sans">
+      <AnimatedBackground />
+      <Nav scrolled={scrolled} dark={dark} toggleDark={() => setDark(d => !d)} />
+      <ErrorBoundary>
+        <Routes>
+          <Route path="/"                  element={<HomePage />} />
+          <Route path="/hoe-werkt-het"     element={<HoeWerktHetPage />} />
+          <Route path="/voor/:sector"      element={<VoorSectorPage />} />
+          <Route path="/verhalen"          element={<VerhalenPage />} />
+          <Route path="/verhalen/:slug"    element={<VerhaalDetailPage />} />
+          <Route path="/toolbox"           element={<ToolboxPageWrapper />} />
+          <Route path="/updates"           element={<UpdatesPageWrapper />} />
+          <Route path="/updates/:id"       element={<UpdateDetailPageWrapper />} />
+          <Route path="/kennismaken"       element={<KennismakenPage />} />
+          {/* Catch-all */}
+          <Route path="*"                  element={<NotFoundPage />} />
+        </Routes>
+      </ErrorBoundary>
+    </div>
+  );
+}
+
+/* Wrappers that preserve the old navigate-prop API for legacy pages */
+function ToolboxPageWrapper() {
+  const [toolId, setToolId] = useState(null);
   function navigate(p, tid) {
-    setPage(p);
-    setToolId(tid || null);
-    window.scrollTo(0, 0);
+    if (p === 'toolbox') { setToolId(tid || null); window.scrollTo(0, 0); }
+    else window.location.href = p === 'home' ? '/' : `/${p}`;
   }
+  return <ToolboxPage navigate={navigate} initialToolId={toolId} />;
+}
+
+function UpdatesPageWrapper() {
+  const [updateId, setUpdateId] = useState(null);
+  const [page, setPage] = useState('updates');
+  function navigate(p, tid) {
+    if (p === 'update-detail') { setPage('update-detail'); setUpdateId(tid); window.scrollTo(0, 0); }
+    else if (p === 'updates') { setPage('updates'); window.scrollTo(0, 0); }
+    else window.location.href = p === 'home' ? '/' : `/${p}`;
+  }
+  if (page === 'update-detail') return <UpdateDetailPage navigate={navigate} updateId={updateId} />;
+  return <UpdatesPage navigate={navigate} />;
+}
+
+function UpdateDetailPageWrapper() {
+  function navigate(p, tid) {
+    if (p === 'updates') window.history.back();
+    else window.location.href = p === 'home' ? '/' : `/${p}`;
+  }
+  return <UpdateDetailPage navigate={navigate} updateId={null} />;
+}
+
+function NotFoundPage() {
+  return (
+    <main style={{ paddingTop: 68 }}>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] p-10 text-center">
+        <div className="text-6xl mb-4">404</div>
+        <h1 className="text-foreground text-2xl font-bold mb-3">Pagina niet gevonden</h1>
+        <a href="/" className="text-primary font-semibold underline-offset-4 hover:underline">
+          Terug naar home
+        </a>
+      </div>
+    </main>
+  );
+}
+
+export default function App() {
+  const [dark, setDark] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    const stored = localStorage.getItem('theme');
+    if (stored) return stored === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-background text-foreground font-sans">
-        <Nav page={page} navigate={navigate} scrolled={scrolled} dark={dark} toggleDark={() => setDark(d => !d)} />
-        <ErrorBoundary>
-          {page === 'home'          && <HomePage navigate={navigate} />}
-          {page === 'toolbox'       && <ToolboxPage navigate={navigate} initialToolId={toolId} />}
-          {page === 'updates'       && <UpdatesPage navigate={navigate} />}
-          {page === 'update-detail' && <UpdateDetailPage navigate={navigate} updateId={toolId} />}
-        </ErrorBoundary>
-      </div>
+      <BrowserRouter>
+        <ScrollToTop />
+        <AppLayout dark={dark} setDark={setDark} />
+      </BrowserRouter>
     </ErrorBoundary>
   );
 }
