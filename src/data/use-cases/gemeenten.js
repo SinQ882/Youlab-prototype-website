@@ -51,7 +51,7 @@ export default {
     toolSlugs: ['5w1h', 'systeemmap', 'empathy-map', 'actieplan'],
   },
 
-  storySlug: null,
+  storySlug: 'westdal-wijkvernieuwing',
 
   faq: [
     {
