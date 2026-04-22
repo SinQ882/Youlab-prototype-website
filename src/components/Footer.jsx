@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-[1120px] mx-auto flex flex-wrap justify-between items-center gap-5">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 no-underline">
-          <img src="./youlab-icon.svg" alt="YouLab icon" width={28} height={28} />
+          <img src={import.meta.env.BASE_URL + 'youlab-icon.svg'} alt="YouLab icon" width={28} height={28} />
           <span className="text-lg font-extrabold text-primary tracking-tight">YouLab</span>
         </Link>
 
