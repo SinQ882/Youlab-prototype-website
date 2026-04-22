@@ -142,7 +142,7 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <BrowserRouter>
         <ScrollToTop />
         <AppLayout dark={dark} setDark={setDark} />
       </BrowserRouter>
