@@ -1,46 +1,35 @@
-import { useParams, Link } from 'react-router-dom';
-import { Button } from '../components/ui/button.jsx';
+import { useParams, Navigate } from 'react-router-dom';
+import { useCases } from '../data/use-cases/index.js';
 import Footer from '../components/Footer.jsx';
-
-const sectorLabels = {
-  gemeenten:    'Gemeenten',
-  onderwijs:    'Onderwijs',
-  mkb:          'MKB',
-  'non-profit': 'Non-profit',
-  adviesbureaus:'Adviesbureaus',
-};
+import UseCaseHero from '../components/use-case/UseCaseHero.jsx';
+import UseCaseRecognition from '../components/use-case/UseCaseRecognition.jsx';
+import UseCaseApplications from '../components/use-case/UseCaseApplications.jsx';
+import UseCaseToolbox from '../components/use-case/UseCaseToolbox.jsx';
+import UseCaseStory from '../components/use-case/UseCaseStory.jsx';
+import UseCaseFaq from '../components/use-case/UseCaseFaq.jsx';
+import UseCasePartners from '../components/use-case/UseCasePartners.jsx';
+import UseCaseCta from '../components/use-case/UseCaseCta.jsx';
 
 export default function VoorSectorPage() {
   const { sector } = useParams();
-  const label = sectorLabels[sector] || sector;
+  const data = useCases[sector];
+
+  if (!data) {
+    return <Navigate to="/404" replace />;
+  }
+
+  const { accentColor, label } = data;
 
   return (
-    <main style={{ paddingTop: 68 }}>
-      <section className="bg-background py-24">
-        <div className="max-w-[720px] mx-auto px-6 text-center">
-          <span className="inline-flex items-center rounded-full border border-primary/15 bg-secondary text-secondary-foreground px-4 py-1.5 text-[13px] font-semibold mb-8">
-            Voor wie — {label}
-          </span>
-          <h1
-            className="text-foreground font-extrabold tracking-tight mb-5"
-            style={{ fontSize: 'clamp(32px, 5vw, 52px)' }}
-          >
-            YouLab voor {label}
-          </h1>
-          <p className="text-muted-foreground text-lg leading-relaxed mb-10">
-            Hier komt de sectorspecifieke uitleg: hoe YouLab aansluit bij de vraagstukken en werkwijze van {label.toLowerCase()}.
-          </p>
-          <div
-            className="rounded-2xl border border-border bg-muted/50 p-10 text-muted-foreground text-sm mb-10"
-            style={{ fontStyle: 'italic' }}
-          >
-            🚧 Paginainhoud volgt — placeholder voor bespreekprototype
-          </div>
-          <Button variant="gradient" size="lg" asChild>
-            <Link to="/" className="no-underline">← Terug naar home</Link>
-          </Button>
-        </div>
-      </section>
+    <main>
+      <UseCaseHero         data={data} accentColor={accentColor} label={label} />
+      <UseCaseRecognition  data={data} accentColor={accentColor} />
+      <UseCaseApplications data={data} accentColor={accentColor} />
+      <UseCaseToolbox      data={data} accentColor={accentColor} />
+      <UseCaseStory        data={data} />
+      <UseCaseFaq          data={data} accentColor={accentColor} />
+      <UseCasePartners     data={data} />
+      <UseCaseCta          data={data} accentColor={accentColor} />
       <Footer />
     </main>
   );
