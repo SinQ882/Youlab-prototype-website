@@ -2,8 +2,23 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import SectionHeading from './SectionHeading.jsx';
 import ExampleBadge from './ExampleBadge.jsx';
+import { stories } from '../data/stories/index.js';
+
+const SECTOR_COLORS = {
+  gemeenten: '#4057ff', onderwijs: '#7c3aed', mkb: '#f59e0b',
+  'non-profit': '#ef4444', adviesbureaus: '#10b981',
+};
+const SECTOR_LABELS = {
+  gemeenten: 'Gemeente', onderwijs: 'Onderwijs', mkb: 'MKB',
+  'non-profit': 'Non-profit', adviesbureaus: 'Adviesbureau',
+};
 
 export default function StoryTeaser() {
+  const featured = stories.find(s => s.featured) ?? stories[0];
+  if (!featured) return null;
+
+  const color = SECTOR_COLORS[featured.sector] ?? 'var(--primary)';
+
   return (
     <section className="bg-background py-20">
       <div className="max-w-[1120px] mx-auto px-6">
@@ -13,18 +28,14 @@ export default function StoryTeaser() {
           center
         />
 
-        {/* Featured story card */}
         <div
           className="rounded-2xl border border-border bg-card overflow-hidden"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          }}
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}
         >
           {/* Visual side */}
           <div
             style={{
-              background: 'linear-gradient(135deg, rgba(64,87,255,0.15) 0%, rgba(245,158,11,0.12) 100%)',
+              background: `linear-gradient(135deg, ${featured.hero.gradientFrom}, ${featured.hero.gradientTo})`,
               minHeight: 280,
               display: 'flex',
               alignItems: 'center',
@@ -33,20 +44,20 @@ export default function StoryTeaser() {
             }}
           >
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 56, marginBottom: 12 }}>🏘️</div>
+              <div style={{ fontSize: 56, marginBottom: 12 }}>{featured.hero.emoji}</div>
               <div
                 style={{
                   display: 'inline-block',
-                  background: 'rgba(64,87,255,0.12)',
-                  color: '#4057ff',
+                  background: `${color}18`,
+                  color,
                   fontSize: 12,
                   fontWeight: 700,
                   padding: '4px 12px',
                   borderRadius: 100,
-                  border: '1px solid rgba(64,87,255,0.2)',
+                  border: `1px solid ${color}30`,
                 }}
               >
-                Gemeente
+                {SECTOR_LABELS[featured.sector] ?? featured.sector}
               </div>
             </div>
           </div>
@@ -54,32 +65,33 @@ export default function StoryTeaser() {
           {/* Text side */}
           <div className="p-10 flex flex-col gap-5 justify-center">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[13px] font-semibold text-muted-foreground">Wijkvernieuwing Arnhem</span>
+              <span className="text-[13px] font-semibold text-muted-foreground">
+                {featured.context.organization}
+              </span>
               <ExampleBadge />
             </div>
 
             <h3
               className="text-foreground font-bold leading-snug"
-              style={{ fontSize: 'clamp(20px, 2.5vw, 26px)' }}
+              style={{ fontSize: 'clamp(18px, 2.5vw, 24px)' }}
             >
-              Van versnipperde overleggen naar één gedragen actieplan
+              {featured.title}&nbsp;<ExampleBadge />
             </h3>
 
             <p className="text-muted-foreground text-[15px] leading-relaxed">
-              Een gemeente bracht 12 partijen samen rond leefbaarheid in drie wijken. Via de Empathy Map kwamen inzichten boven tafel die geen van de partijen verwacht had. In 6 weken: van analyse naar een plan gedragen door bewoners, woningcorporatie en welzijnswerk.
+              {featured.oneLineResult}&nbsp;<ExampleBadge />
             </p>
 
             <Link
-              to="/verhalen"
-              className="no-underline inline-flex items-center gap-2 font-semibold text-[15px] mt-2 transition-all"
-              style={{ color: '#4057ff' }}
+              to={`/verhalen/${featured.slug}`}
+              className="no-underline inline-flex items-center gap-2 font-semibold text-[15px] mt-2 transition-all hover:gap-3"
+              style={{ color }}
             >
               Lees het verhaal <ArrowRight size={15} />
             </Link>
           </div>
         </div>
 
-        {/* Link to all stories */}
         <div className="text-center mt-8">
           <Link
             to="/verhalen"

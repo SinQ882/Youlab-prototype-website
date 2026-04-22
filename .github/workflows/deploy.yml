@@ -3,8 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - claude/rebuild-youlab-website-Fvpbk
-      - main
+      - staging
   workflow_dispatch:
 
 permissions:
@@ -28,6 +27,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          VITE_BASE_URL: /youlab-prototype-website/
 
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
