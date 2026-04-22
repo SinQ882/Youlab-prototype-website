@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { resolve } from 'path';
 
 export default defineConfig({
-  base: './',
+  base: '/Youlab-prototype-website/',
   plugins: [tailwindcss(), react()],
   resolve: {
     alias: {
