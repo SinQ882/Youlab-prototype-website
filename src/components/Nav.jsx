@@ -47,6 +47,7 @@ export default function Nav({ scrolled, dark, toggleDark }) {
         {/* Desktop nav */}
         <nav className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           <NavLink to="/platform">Het platform</NavLink>
+          <NavLink to="/aanbod">Aanbod</NavLink>
 
           {/* Voor wie dropdown */}
           <div ref={dropRef} style={{ position: 'relative' }}>
@@ -125,6 +126,7 @@ export default function Nav({ scrolled, dark, toggleDark }) {
         <div className="bg-card border-t border-border px-6 pb-6 pt-4 shadow-lg">
           <div className="flex flex-col gap-1">
             <MobileNavLink to="/platform">Het platform</MobileNavLink>
+            <MobileNavLink to="/aanbod">Aanbod</MobileNavLink>
 
             <div>
               <button
