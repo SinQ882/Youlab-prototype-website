@@ -11,6 +11,7 @@ import VoorSectorPage from './pages/VoorSectorPage';
 import VerhalenPage from './pages/VerhalenPage';
 import VerhaalDetailPage from './pages/VerhaalDetailPage';
 import KennismakenPage from './pages/KennismakenPage';
+import AanbodPage from './pages/AanbodPage';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -80,6 +81,7 @@ function AppLayout({ dark, setDark }) {
           <Route path="/toolbox"           element={<ToolboxPageWrapper />} />
           <Route path="/updates"           element={<UpdatesPageWrapper />} />
           <Route path="/updates/:id"       element={<UpdateDetailPageWrapper />} />
+          <Route path="/aanbod"            element={<AanbodPage />} />
           <Route path="/kennismaken"       element={<KennismakenPage />} />
           {/* Catch-all */}
           <Route path="*"                  element={<NotFoundPage />} />
