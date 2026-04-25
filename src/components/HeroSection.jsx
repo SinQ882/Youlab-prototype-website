@@ -110,13 +110,13 @@ export default function HeroSection() {
           {/* CTAs */}
           <div className="flex flex-wrap gap-3 items-center justify-center">
             <Button variant="gradient" size="lg" asChild>
-              <Link to="/hoe-werkt-het" className="no-underline flex items-center gap-2">
+              <Link to="/platform" className="no-underline flex items-center gap-2">
                 Ontdek hoe het werkt <ArrowRight size={16} />
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link to="/verhalen" className="no-underline flex items-center gap-2">
-                Bekijk een projectverhaal <ChevronRight size={16} />
+              <Link to="/platform" className="no-underline flex items-center gap-2">
+                Bekijk het platform <ChevronRight size={16} />
               </Link>
             </Button>
           </div>

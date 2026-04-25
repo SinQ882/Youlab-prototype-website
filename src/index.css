@@ -116,6 +116,14 @@
   .approach-mobile   { display: block; }
   .aanpak-desktop    { display: none !important; }
   .aanpak-mobile     { display: flex !important; }
+  /* PlatformShowcase: stack duo layouts on mobile */
+  .platform-showcase-duo {
+    grid-template-columns: 1fr !important;
+  }
+  /* PlatformTour: always single column on mobile */
+  .platform-tour-row {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /* ─── Animated background blobs ─── */
