@@ -1,12 +1,12 @@
 import { useState, useEffect, Component } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Nav from './components/Nav';
 import HomePage from './components/HomePage';
 import ToolboxPage from './components/ToolboxPage';
 import UpdatesPage from './components/UpdatesPage';
 import UpdateDetailPage from './components/UpdateDetailPage';
 import AnimatedBackground from './components/AnimatedBackground';
-import HoeWerktHetPage from './pages/HoeWerktHetPage';
+import PlatformPage from './pages/PlatformPage';
 import VoorSectorPage from './pages/VoorSectorPage';
 import VerhalenPage from './pages/VerhalenPage';
 import VerhaalDetailPage from './pages/VerhaalDetailPage';
@@ -72,7 +72,8 @@ function AppLayout({ dark, setDark }) {
       <ErrorBoundary>
         <Routes>
           <Route path="/"                  element={<HomePage />} />
-          <Route path="/hoe-werkt-het"     element={<HoeWerktHetPage />} />
+          <Route path="/platform"          element={<PlatformPage />} />
+          <Route path="/hoe-werkt-het"     element={<Navigate to="/platform" replace />} />
           <Route path="/voor/:sector"      element={<VoorSectorPage />} />
           <Route path="/verhalen"          element={<VerhalenPage />} />
           <Route path="/verhalen/:slug"    element={<VerhaalDetailPage />} />
