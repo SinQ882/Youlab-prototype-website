@@ -6,6 +6,7 @@ import UseCaseRecognition from '../components/use-case/UseCaseRecognition.jsx';
 import UseCaseApplications from '../components/use-case/UseCaseApplications.jsx';
 import UseCaseToolbox from '../components/use-case/UseCaseToolbox.jsx';
 import UseCaseStory from '../components/use-case/UseCaseStory.jsx';
+import UseCaseAanbod from '../components/use-case/UseCaseAanbod.jsx';
 import UseCaseFaq from '../components/use-case/UseCaseFaq.jsx';
 import UseCasePartners from '../components/use-case/UseCasePartners.jsx';
 import UseCaseCta from '../components/use-case/UseCaseCta.jsx';
@@ -27,6 +28,7 @@ export default function VoorSectorPage() {
       <UseCaseApplications data={data} accentColor={accentColor} />
       <UseCaseToolbox      data={data} accentColor={accentColor} />
       <UseCaseStory        data={data} />
+      <UseCaseAanbod       data={data} accentColor={accentColor} />
       <UseCaseFaq          data={data} accentColor={accentColor} />
       <UseCasePartners     data={data} />
       <UseCaseCta          data={data} accentColor={accentColor} />
