@@ -10,7 +10,7 @@ const items = [
     title: 'Platform',
     duration: 'Doorlopend',
     accent: '#4057ff',
-    gradient: 'linear-gradient(135deg, #eef2ff 0%, #dde4ff 100%)',
+    gradient: 'var(--secondary)',
     intro: 'De digitale werkomgeving voor teams die zelfstandig aan de slag willen met de 4O-aanpak. Geen begeleiding nodig — jij bepaalt het tempo.',
     features: [
       'Digitale werkomgeving voor je hele team',
@@ -92,7 +92,7 @@ export default function AanbodCards() {
   const platform = items[0];
 
   return (
-    <section className="py-20" style={{ background: 'linear-gradient(160deg, #f7f8fc 0%, #eef0ff 50%, #fef9ee 100%)' }}>
+    <section className="py-20" style={{ background: 'var(--muted)' }}>
       <div className="max-w-[1120px] mx-auto px-6">
         <SectionHeading
           eyebrow="Vier opties"

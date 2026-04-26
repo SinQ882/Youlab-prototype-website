@@ -7,7 +7,7 @@ export default function ClosingCta() {
     <section
       className="relative overflow-hidden py-24"
       style={{
-        background: 'linear-gradient(135deg, #f7f8fc 0%, #eef0ff 50%, #fef9ee 100%)',
+        background: 'var(--muted)',
       }}
     >
       {/* Decorative shapes */}

@@ -39,20 +39,20 @@ function UpdateCover({ update, height = 220, radius = 16 }) {
 
 export default function UpdatesPage({ navigate }) {
   return (
-    <main style={{ paddingTop: 68, minHeight: '100vh', background: '#FAFAFE' }}>
+    <main style={{ paddingTop: 68, minHeight: '100vh', background: 'var(--background)' }}>
 
       {/* Page header */}
-      <section style={{ background: '#fff', padding: '72px 24px 56px', borderBottom: '1px solid #F1F5F9' }}>
+      <section style={{ background: 'var(--card)', padding: '72px 24px 56px', borderBottom: '1px solid var(--border)' }}>
         <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
           <PillBadge>Nieuw in YouLab</PillBadge>
           <h1 style={{
             fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 900,
-            color: '#0B0B3B', marginTop: 16, marginBottom: 16,
+            color: 'var(--foreground)', marginTop: 16, marginBottom: 16,
             letterSpacing: -1.5, lineHeight: 1.05,
           }}>
             Updates & nieuwe features
           </h1>
-          <p style={{ fontSize: 17, color: '#64748B', lineHeight: 1.65, maxWidth: 520, margin: '0 auto' }}>
+          <p style={{ fontSize: 17, color: 'var(--muted-foreground)', lineHeight: 1.65, maxWidth: 520, margin: '0 auto' }}>
             Alles wat er nieuw is in YouLab — van UX-verbeteringen tot nieuwe werkvormen en prijswijzigingen.
           </p>
         </div>
@@ -78,7 +78,7 @@ export default function UpdatesPage({ navigate }) {
                 <div style={{ flexShrink: 0, position: 'relative', zIndex: 1, marginTop: 4 }}>
                   <div style={{
                     width: 40, height: 40, borderRadius: '50%',
-                    background: '#fff',
+                    background: 'var(--card)',
                     border: `2px solid ${update.color}40`,
                     boxShadow: `0 0 0 4px ${update.color}10`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -92,9 +92,9 @@ export default function UpdatesPage({ navigate }) {
                 <div
                   style={{
                     flex: 1,
-                    background: '#fff',
+                    background: 'var(--card)',
                     borderRadius: 20,
-                    border: '1px solid #E8EDF5',
+                    border: '1px solid var(--border)',
                     overflow: 'hidden',
                     boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
                     transition: 'transform 0.2s, box-shadow 0.2s',
@@ -121,23 +121,23 @@ export default function UpdatesPage({ navigate }) {
                       </span>
                       <span style={{
                         fontSize: 12, fontWeight: 600,
-                        background: '#F1F5F9', color: '#64748B',
+                        background: 'var(--secondary)', color: 'var(--secondary-foreground)',
                         padding: '3px 10px', borderRadius: 6,
                       }}>
                         {update.version}
                       </span>
-                      <span style={{ fontSize: 12, color: '#94A3B8', marginLeft: 4 }}>
+                      <span style={{ fontSize: 12, color: 'var(--muted-foreground)', marginLeft: 4 }}>
                         {formatDate(update.date)}
                       </span>
                     </div>
 
                     <h2 style={{
-                      fontSize: 20, fontWeight: 800, color: '#0B0B3B',
+                      fontSize: 20, fontWeight: 800, color: 'var(--foreground)',
                       marginBottom: 8, letterSpacing: -0.4, lineHeight: 1.3,
                     }}>
                       {update.title}
                     </h2>
-                    <p style={{ fontSize: 14, color: '#64748B', lineHeight: 1.65, marginBottom: 20 }}>
+                    <p style={{ fontSize: 14, color: 'var(--muted-foreground)', lineHeight: 1.65, marginBottom: 20 }}>
                       {update.summary}
                     </p>
 

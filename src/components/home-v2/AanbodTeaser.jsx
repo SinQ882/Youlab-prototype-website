@@ -99,7 +99,7 @@ function TeaserCard({ card }) {
       className="rounded-2xl border flex flex-col"
       style={{
         borderColor: isPlatform ? `${accent}40` : 'var(--border)',
-        background: isPlatform ? `linear-gradient(145deg, #eef2ff 0%, #e8ecff 100%)` : 'var(--card)',
+        background: isPlatform ? 'var(--secondary)' : 'var(--card)',
         padding: 24,
         gap: 16,
       }}

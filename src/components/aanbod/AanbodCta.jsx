@@ -7,7 +7,7 @@ export default function AanbodCta() {
   return (
     <section
       className="relative overflow-hidden py-24"
-      style={{ background: 'linear-gradient(135deg, #f7f8fc 0%, #eef0ff 50%, #fef9ee 100%)' }}
+      style={{ background: 'var(--muted)' }}
     >
       <div aria-hidden="true" className="pointer-events-none" style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: -80, right: -80, width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(64,87,255,0.10) 0%, transparent 60%)' }} />
