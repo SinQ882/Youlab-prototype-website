@@ -2,8 +2,30 @@ import { CheckCircle } from 'lucide-react';
 import SectionHeading from '../SectionHeading.jsx';
 import ExampleBadge from '../ExampleBadge.jsx';
 
+function RoleTags({ roles, accentColor }) {
+  if (!roles || roles.length === 0) return null;
+  return (
+    <div className="flex flex-wrap items-center gap-2 mb-10 -mt-6">
+      <span className="text-muted-foreground text-[13px] font-medium mr-1">Vaak gebruikt door:</span>
+      {roles.map((role, i) => (
+        <span
+          key={i}
+          className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-semibold border"
+          style={{
+            background: `${accentColor}0d`,
+            borderColor: `${accentColor}28`,
+            color: accentColor,
+          }}
+        >
+          {role}&nbsp;<ExampleBadge />
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export default function UseCaseRecognition({ data, accentColor }) {
-  const { heading, points } = data.recognition;
+  const { heading, forRoles, points } = data.recognition;
   return (
     <section className="bg-muted/40 py-20 border-y border-border">
       <div className="max-w-[1120px] mx-auto px-6">
@@ -11,6 +33,7 @@ export default function UseCaseRecognition({ data, accentColor }) {
           eyebrow="Herkenbaar?"
           title={<>{heading}&nbsp;<ExampleBadge /></>}
         />
+        <RoleTags roles={forRoles} accentColor={accentColor} />
         <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
           {points.map((point, i) => (
             <div
