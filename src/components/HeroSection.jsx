@@ -88,7 +88,7 @@ export default function HeroSection() {
             className="text-foreground font-extrabold leading-[1.08] tracking-tight mb-3"
             style={{ fontSize: 'clamp(36px, 5.5vw, 68px)' }}
           >
-            Voor projecten waar de complexiteit{' '}
+            Overzicht in projecten waar{' '}
             <span
               className="relative inline-block"
               style={{
@@ -98,7 +98,7 @@ export default function HeroSection() {
                 backgroundClip: 'text',
               }}
             >
-              níet in het probleem zit
+              veel samenkomt
             </span>
           </h1>
 
@@ -110,7 +110,7 @@ export default function HeroSection() {
           {/* Subclaim */}
           <p className="text-muted-foreground leading-relaxed mb-10 max-w-[580px]"
             style={{ fontSize: 'clamp(16px, 2vw, 20px)' }}>
-            Sommige vraagstukken zijn niet ingewikkeld omdat de oplossing onbekend is — maar omdat iedereen iets anders wil. YouLab geeft je het overzicht, de structuur en de regie om dat samen aan te pakken.
+            Voor vraagstukken met meerdere partijen, belangen en onderdelen. YouLab geeft je een werkmethode en een centrale plek om dat samen aan te pakken.
           </p>
 
           {/* CTAs */}
