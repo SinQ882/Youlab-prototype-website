@@ -90,7 +90,7 @@ export default {
   cta: {
     heading: 'Verken YouLab voor non-profit',
     body: 'Wil je weten hoe YouLab past bij jouw coalitietraject of programma? Plan een korte kennismaking.',
-    primaryCta: { label: 'Plan een kennismaking', href: '/kennismaken' },
+    primaryCta: { label: 'Start je vraagstuk', href: '/kennismaken' },
     secondaryCta: { label: 'Bekijk een projectverhaal', href: '/verhalen' },
   },
 };

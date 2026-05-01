@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Calendar } from 'lucide-react';
+import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Button } from './ui/button.jsx';
 
 export default function ClosingCta() {
@@ -32,31 +32,31 @@ export default function ClosingCta() {
 
       <div className="max-w-[680px] mx-auto px-6 text-center relative">
         <span className="inline-flex items-center rounded-full border border-primary/15 bg-secondary text-secondary-foreground px-4 py-1.5 text-[13px] font-semibold tracking-[0.2px] mb-8">
-          Laagdrempelig beginnen
+          Direct aan de slag
         </span>
 
         <h2
           className="text-foreground font-extrabold leading-tight tracking-tight mb-4"
           style={{ fontSize: 'clamp(28px, 4vw, 44px)' }}
         >
-          Nieuwsgierig?
+          Klaar om te starten?
           <br />
-          Bekijk eerst een voorbeeldproject.
+          Begin met je vraagstuk.
         </h2>
 
         <p className="text-muted-foreground text-lg leading-relaxed mb-10 max-w-[480px] mx-auto">
-          Geen verplichtingen, geen verkoopgesprek. Verken hoe YouLab werkt aan de hand van een concreet voorbeeld — en beslis daarna.
+          Geen verplichtingen, geen verkoopgesprek. Vertel ons over je vraagstuk en ontdek hoe YouLab je team verder helpt.
         </p>
 
         <div className="flex flex-wrap gap-3 items-center justify-center">
           <Button variant="gradient" size="lg" asChild>
-            <Link to="/verhalen" className="no-underline flex items-center gap-2">
-              Bekijk een voorbeeldproject <ArrowRight size={16} />
+            <Link to="/kennismaken" className="no-underline flex items-center gap-2">
+              Start je vraagstuk <ArrowRight size={16} />
             </Link>
           </Button>
           <Button variant="outline" size="lg" asChild>
-            <Link to="/kennismaken" className="no-underline flex items-center gap-2">
-              <Calendar size={16} /> Plan een kennismaking
+            <Link to="/verhalen" className="no-underline flex items-center gap-2">
+              Bekijk een projectverhaal <ChevronRight size={16} />
             </Link>
           </Button>
         </div>

@@ -90,7 +90,7 @@ export default {
   cta: {
     heading: 'Verken YouLab voor MKB',
     body: 'Wil je weten hoe YouLab past bij jouw strategie- of innovatietraject? Plan een korte kennismaking.',
-    primaryCta: { label: 'Plan een kennismaking', href: '/kennismaken' },
+    primaryCta: { label: 'Start je vraagstuk', href: '/kennismaken' },
     secondaryCta: { label: 'Bekijk een projectverhaal', href: '/verhalen' },
   },
 };

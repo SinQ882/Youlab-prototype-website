@@ -50,13 +50,14 @@ function ApplicationBlock({ app, index, accentColor }) {
 }
 
 export default function UseCaseApplications({ data, accentColor }) {
+  const sectorLabel = data.label ?? '';
   return (
     <section className="bg-background py-20">
       <div className="max-w-[1120px] mx-auto px-6">
         <SectionHeading
-          eyebrow="Zo wordt YouLab gebruikt"
-          title={<>Drie concrete toepassingen&nbsp;<ExampleBadge /></>}
-          subtitle="Herkenbare situaties, direct inzetbaar."
+          eyebrow="Praktijkvoorbeelden"
+          title={<>Zo wordt YouLab gebruikt in {sectorLabel}&nbsp;<ExampleBadge /></>}
+          subtitle="Drie voorbeelden van hoe teams YouLab inzetten bij verschillende vraagstukken."
           center={false}
         />
         {data.applications.map((app, i) => (

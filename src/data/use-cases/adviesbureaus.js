@@ -94,7 +94,7 @@ export default {
   cta: {
     heading: 'Verken YouLab voor adviesbureaus',
     body: 'Wil je weten hoe YouLab past bij jouw klanttrajecten en werkwijze? Plan een korte kennismaking.',
-    primaryCta: { label: 'Plan een kennismaking', href: '/kennismaken' },
+    primaryCta: { label: 'Start je vraagstuk', href: '/kennismaken' },
     secondaryCta: { label: 'Bekijk een projectverhaal', href: '/verhalen' },
   },
 };
