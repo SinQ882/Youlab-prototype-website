@@ -68,3 +68,28 @@ Data-first: vijf sector-databestanden exporteren een gestandaardiseerde structuu
 - Geen ExampleBadge op structurele lege-staat-teksten (UseCaseStory, UseCasePartners)
 - Hero-illustratie verborgen op mobiel via `hidden lg:block`
 - UseCaseCta gebruikt `color-mix()` voor gradient richting sector-kleur — moderne browsers
+
+---
+
+# Verhalensysteem (branch: feature/verhalen-systeem)
+
+## Aanpak
+Data-first: twee verhaalbestanden exporteren een gestandaardiseerde structuur. `index.js` biedt `getBySlug`, `getBySector`, `getRelated`. Pagina's zijn thin controllers. Componenten zijn pure presentatie.
+
+## Twee voorbeeldverhalen
+- **westdal-wijkvernieuwing** (gemeenten, `featured: true`) — Gemeente Westdal, fases: ontmoeten/ontdekken/ontwikkelen
+- **noordwijk-onderzoeksgroep** (onderwijs, `featured: false`) — Hogeschool Noordwijk, fases: ontdekken/ontwikkelen/organiseren
+
+## Koppelingen
+- `StoryTeaser` op homepage: `stories.find(s => s.featured) ?? stories[0]`
+- `UseCaseStory` op sectorpagina's: laadt verhaal via `getBySlug(data.storySlug)`, toont lege staat als null
+- `gemeenten.js` en `onderwijs.js` hebben `storySlug` gevuld; andere sectoren tonen lege staat
+
+## Keuzes en aannames
+- `featured` boolean toegevoegd aan datastructuur (niet in origineel template-spec, wel nodig voor StoryTeaser)
+- Prose-tekst gesplitst op `\n\n` voor alinea-rendering — consistent met UpdateDetailPage-patroon
+- `SECTOR_COLORS` gedupliceerd in meerdere componenten (geen shared util) — acceptabel voor prototype (YAGNI)
+- Onbekende slug in detail-pagina: `<Navigate to="/verhalen" replace />` (friendlier dan 404)
+- `getRelated`: andere sector eerst, zodat StoryRelated breedte toont ook met 2 verhalen
+- Avatar-placeholder: initialen uit `quote.author.split(' ').map(w => w[0])`, achtergrond sector-kleur
+- ExampleBadge op: titel, oneLineResult, sectortag, organisatienaam, quote, auteur — niet op fase-badges en tool-chips (structureel)

@@ -12,6 +12,7 @@ export default {
 
   recognition: {
     heading: 'Dit speelt waarschijnlijk bij jullie…',
+    forRoles: ['Senior adviseurs', 'Procesbegeleiders', 'Facilitators', 'Projectleiders'],
     points: [
       {
         title: 'Workshops zonder follow-through',
@@ -45,6 +46,18 @@ export default {
       image: null,
     },
   ],
+
+  questionTypes: {
+    intro: 'Bij dit soort vraagstukken zetten teams YouLab vaak in:',
+    types: [
+      { title: 'Strategische adviestrajecten', description: 'Trajecten waarbij meerdere lagen van een cliëntorganisatie betrokken zijn bij de uitkomst.', icon: '🎯' },
+      { title: 'Workshops en sessies', description: 'Werksessies met cliëntorganisaties waarbij YouLab het procesgeheugen bijhoudt.', icon: '🖊️' },
+      { title: 'Verandertrajecten', description: 'Complexe organisatieveranderingen met veel stakeholders en uiteenlopende belangen.', icon: '🔄' },
+      { title: 'Onderzoek en evaluatie', description: 'Evaluatie- en onderzoeksprojecten voor opdrachtgevers waarbij meerdere partijen betrokken zijn.', icon: '🔍' },
+      { title: 'Procesbegeleiding', description: 'Facilitatie van complexe samenwerkingsprocessen waarbij structuur het verschil maakt.', icon: '🧩' },
+      { title: 'Methodisch werken', description: 'Facilitators en adviseurs die hun aanpak willen ondersteunen met een gedeelde werkruimte.', icon: '⚖️' },
+    ],
+  },
 
   toolbox: {
     intro: 'Deze tools passen bij de fasering van een advies- of begeleidingstraject — van probleemanalyse tot uitvoerbaar plan.',
@@ -81,7 +94,7 @@ export default {
   cta: {
     heading: 'Verken YouLab voor adviesbureaus',
     body: 'Wil je weten hoe YouLab past bij jouw klanttrajecten en werkwijze? Plan een korte kennismaking.',
-    primaryCta: { label: 'Plan een kennismaking', href: '/kennismaken' },
+    primaryCta: { label: 'Start je vraagstuk', href: '/kennismaken' },
     secondaryCta: { label: 'Bekijk een projectverhaal', href: '/verhalen' },
   },
 };

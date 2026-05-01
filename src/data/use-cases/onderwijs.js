@@ -12,6 +12,7 @@ export default {
 
   recognition: {
     heading: 'Dit speelt waarschijnlijk bij jullie…',
+    forRoles: ['Onderwijscoördinatoren', 'Onderzoekers', 'Opleidingsmanagers', 'Facility managers', 'Projectleiders'],
     points: [
       {
         title: 'Studenten die zwemmen zonder kader',
@@ -46,12 +47,24 @@ export default {
     },
   ],
 
+  questionTypes: {
+    intro: 'Bij dit soort vraagstukken zetten teams YouLab vaak in:',
+    types: [
+      { title: 'Studentenprojecten met opdrachtgevers', description: 'Werkveldopdrachten waarbij studenten, docenten en externe partners samen in één werkruimte werken.', icon: '🎓' },
+      { title: 'Onderzoeksprogramma\'s', description: 'Meerdere onderzoekers en partners werken aan een gedeeld vraagstuk met overzicht en structuur.', icon: '🔬' },
+      { title: 'Curriculumvernieuwing', description: 'Docenten, studenten en werkveld samen aan een nieuw curriculum — met alle belangen zichtbaar.', icon: '📚' },
+      { title: 'Huisvesting van leeromgevingen', description: 'Herinrichting van leer- en werkplekken met betrokkenheid van gebruikers.', icon: '🏫' },
+      { title: 'Verduurzamingsprojecten op de campus', description: 'Duurzaamheidsinitiatieven waarbij meerdere afdelingen en studenten betrokken zijn.', icon: '🌿' },
+      { title: 'Samenwerkingstrajecten tussen instellingen', description: 'Complexe samenwerkingen tussen opleidingen of onderwijsinstellingen met uiteenlopende belangen.', icon: '🤝' },
+    ],
+  },
+
   toolbox: {
     intro: 'Deze tools uit YouLab sluiten aan bij de fasen van een projectmatig leertraject — van vraagverkenning tot oplevering.',
     toolSlugs: ['5w1h', 'customer-journey', 'prototype-canvas', 'actieplan'],
   },
 
-  storySlug: null,
+  storySlug: 'noordwijk-onderzoeksgroep',
 
   faq: [
     {
@@ -77,7 +90,7 @@ export default {
   cta: {
     heading: 'Verken YouLab voor onderwijs',
     body: 'Wil je weten hoe YouLab past bij jouw leertraject of werkveldopdracht? Plan een korte kennismaking.',
-    primaryCta: { label: 'Plan een kennismaking', href: '/kennismaken' },
+    primaryCta: { label: 'Start je vraagstuk', href: '/kennismaken' },
     secondaryCta: { label: 'Bekijk een projectverhaal', href: '/verhalen' },
   },
 };

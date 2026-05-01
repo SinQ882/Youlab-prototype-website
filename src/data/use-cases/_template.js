@@ -25,6 +25,7 @@ export const useCaseTemplate = {
 
   recognition: {
     heading: 'Dit speelt waarschijnlijk bij jullie…',
+    forRoles: [],               // optioneel: rollen als chips, bijv. ['Projectleiders', 'FM']
     points: [                   // exact 3 items
       { title: '', description: '' },
       { title: '', description: '' },
@@ -37,6 +38,13 @@ export const useCaseTemplate = {
     { title: '', description: '', image: null },
     { title: '', description: '', image: null },
   ],
+
+  questionTypes: {               // optioneel: vraagstuk-types per sector
+    intro: '',                  // bijv. 'Bij dit soort vraagstukken zetten teams YouLab vaak in:'
+    types: [                    // 4-6 items
+      { title: '', description: '', icon: null },
+    ],
+  },
 
   toolbox: {
     intro: '',                  // alinea boven de tool-chips

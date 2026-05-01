@@ -12,6 +12,7 @@ export default {
 
   recognition: {
     heading: 'Dit speelt waarschijnlijk bij jullie…',
+    forRoles: ['Programmamanagers', 'Beleidsmedewerkers', 'Coalitietrekkers', 'Projectleiders'],
     points: [
       {
         title: 'Te veel stakeholders, te weinig richting',
@@ -46,6 +47,18 @@ export default {
     },
   ],
 
+  questionTypes: {
+    intro: 'Bij dit soort vraagstukken zetten teams YouLab vaak in:',
+    types: [
+      { title: 'Programma\'s met meerdere financiers', description: 'Complexe programma\'s waarbij financiers, uitvoerders en doelgroepen elk hun eigen verwachtingen hebben.', icon: '🏦' },
+      { title: 'Coalities rond maatschappelijke thema\'s', description: 'Meerdere organisaties werken samen aan een gedeeld maatschappelijk doel met gedeeld eigenaarschap.', icon: '🌐' },
+      { title: 'Beleidsbeïnvloeding en advocacy', description: 'Trajecten waarbij meerdere organisaties gezamenlijk een positie innemen richting beleid of politiek.', icon: '📢' },
+      { title: 'Organisatieontwikkeling met vrijwilligers', description: 'Verandertrajecten waarbij betaalde krachten en vrijwilligers samen het traject vormgeven.', icon: '🙌' },
+      { title: 'Samenwerking tussen non-profits', description: 'Samenwerkingstrajecten waarbij organisaties hun krachten bundelen en rollen helder moeten zijn.', icon: '🤝' },
+      { title: 'Impactmeting en evaluatie', description: 'Programma-evaluaties waarbij meerdere stakeholders betrokken zijn bij de definitie van succes.', icon: '📊' },
+    ],
+  },
+
   toolbox: {
     intro: 'Deze YouLab-tools sluiten aan bij complexe, meerstakeholder-omgevingen waar draagvlak en helderheid hand in hand moeten gaan.',
     toolSlugs: ['systeemmap', 'empathy-map', 'service-blueprint', 'actieplan'],
@@ -77,7 +90,7 @@ export default {
   cta: {
     heading: 'Verken YouLab voor non-profit',
     body: 'Wil je weten hoe YouLab past bij jouw coalitietraject of programma? Plan een korte kennismaking.',
-    primaryCta: { label: 'Plan een kennismaking', href: '/kennismaken' },
+    primaryCta: { label: 'Start je vraagstuk', href: '/kennismaken' },
     secondaryCta: { label: 'Bekijk een projectverhaal', href: '/verhalen' },
   },
 };

@@ -12,6 +12,7 @@ export default {
 
   recognition: {
     heading: 'Dit speelt waarschijnlijk bij jullie…',
+    forRoles: ['Beleidsmedewerkers', 'Programmamanagers', 'Facility managers', 'Wijkregisseurs', 'Projectleiders'],
     points: [
       {
         title: 'Bewoners haken af',
@@ -46,12 +47,24 @@ export default {
     },
   ],
 
+  questionTypes: {
+    intro: 'Bij dit soort vraagstukken zetten teams YouLab vaak in:',
+    types: [
+      { title: 'Wijkvernieuwing en herinrichting', description: 'Complexe gebiedsprojecten met bewoners, ondernemers en meerdere overheidslagen.', icon: '🏘️' },
+      { title: 'Participatietrajecten', description: 'Bewoners en ondernemers betrekken bij beleid en inrichting van de openbare ruimte.', icon: '🗣️' },
+      { title: 'Beleidsvorming met meerdere afdelingen', description: 'Beleidsvraagstukken waarbij afdelingen en externe partijen samen tot een gedragen uitkomst moeten komen.', icon: '📋' },
+      { title: 'Verduurzaming van vastgoed', description: 'Gemeentelijk vastgoed en openbare ruimte duurzamer maken met meerdere betrokkenen.', icon: '🌱' },
+      { title: 'Organisatieverandering', description: 'Verandertrajecten binnen de gemeente waarbij draagvlak en structuur hand in hand gaan.', icon: '🔄' },
+      { title: 'Huisvesting en herinrichting kantoren', description: 'Herinrichting van gemeentekantoren met medewerkers als actieve deelnemers.', icon: '🏛️' },
+    ],
+  },
+
   toolbox: {
     intro: 'YouLab biedt tools die passen bij elk moment van een participatietraject — van probleemverkenning tot uitvoering.',
     toolSlugs: ['5w1h', 'systeemmap', 'empathy-map', 'actieplan'],
   },
 
-  storySlug: null,
+  storySlug: 'westdal-wijkvernieuwing',
 
   faq: [
     {
@@ -77,7 +90,7 @@ export default {
   cta: {
     heading: 'Verken YouLab voor gemeenten',
     body: 'Wil je weten hoe YouLab past bij jouw participatietraject of gebiedsontwikkeling? Plan een korte kennismaking.',
-    primaryCta: { label: 'Plan een kennismaking', href: '/kennismaken' },
+    primaryCta: { label: 'Start je vraagstuk', href: '/kennismaken' },
     secondaryCta: { label: 'Bekijk een projectverhaal', href: '/verhalen' },
   },
 };

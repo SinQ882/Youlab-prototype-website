@@ -1,20 +1,21 @@
 import SectionHeading from './SectionHeading.jsx';
+import ExampleBadge from './ExampleBadge.jsx';
 
 const outcomes = [
   {
-    icon: '🎯',
-    title: 'Scherpere projecten',
-    desc: 'Teams die structureel samenwerken, formuleren vraagstukken preciezer. Minder ruis, meer focus op wat er echt toe doet.',
+    icon: '🗂️',
+    title: 'Eén centrale plek',
+    desc: 'Alle informatie en stakeholders samenkomen in één gedeelde werkruimte. Niet meer zoeken — gewoon weten waar het staat.',
+  },
+  {
+    icon: '🧭',
+    title: 'Stap voor stap structuur',
+    desc: 'Een duidelijke structuur die je door het proces leidt. Je weet altijd waar je bent en wat de volgende stap is.',
   },
   {
     icon: '🤝',
-    title: 'Beter gedragen besluiten',
-    desc: 'Wanneer alle betrokkenen meedenken en meebouwen, zijn besluiten niet van bovenaf opgelegd — maar van binnenuit gedragen.',
-  },
-  {
-    icon: '🌱',
-    title: 'Blijvende verandering',
-    desc: 'Resultaten die wortel schieten. Niet een rapport dat in een la belandt, maar een aanpak die het team meeneemt in de volgende stap.',
+    title: 'Iedereen mee in het proces',
+    desc: 'Een manier om alle betrokkenen mee te nemen — ook degenen die niet elk overleg bijwonen. Geen verrassing meer achteraf.',
   },
 ];
 
@@ -25,17 +26,14 @@ export default function ImpactSection() {
         {/* Main claim — full width, centred */}
         <div className="text-center max-w-[720px] mx-auto mb-16">
           <SectionHeading
-            eyebrow="Waarom het werkt"
-            title="Als teams écht samenwerken"
+            eyebrow="Wat YouLab brengt"
+            title={<>Zo wordt complexiteit hanteerbaar&nbsp;<ExampleBadge /></>}
           />
           <p
-            className="text-foreground font-semibold leading-snug"
-            style={{ fontSize: 'clamp(18px, 2.5vw, 24px)', marginTop: -24 }}
+            className="text-muted-foreground leading-relaxed"
+            style={{ fontSize: 'clamp(16px, 2vw, 18px)', marginTop: -16 }}
           >
-            worden projecten scherper,{' '}
-            <span style={{ color: '#4057ff' }}>sneller gedragen</span>{' '}
-            en{' '}
-            <span style={{ color: '#10b981' }}>blijvender</span>.
+            YouLab brengt overzicht waar het versnipperd was, structuur waar het ad hoc was, en regie waar je nu schakelt. Geen extra werk — wel een ander ritme.
           </p>
         </div>
 
@@ -48,7 +46,7 @@ export default function ImpactSection() {
             >
               <div className="text-3xl">{o.icon}</div>
               <h3 className="text-foreground font-bold text-[17px] leading-snug">
-                {o.title}
+                {o.title}&nbsp;<ExampleBadge />
               </h3>
               <p className="text-muted-foreground text-[15px] leading-relaxed">
                 {o.desc}

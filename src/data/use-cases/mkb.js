@@ -12,6 +12,7 @@ export default {
 
   recognition: {
     heading: 'Dit speelt waarschijnlijk bij jullie…',
+    forRoles: ['Directie', 'Strategiemanagers', 'Innovatiemanagers', 'Facility managers', 'Projectleiders'],
     points: [
       {
         title: 'Plannen die hangen in de directie',
@@ -46,6 +47,18 @@ export default {
     },
   ],
 
+  questionTypes: {
+    intro: 'Bij dit soort vraagstukken zetten teams YouLab vaak in:',
+    types: [
+      { title: 'Strategische heroriëntatie', description: 'Directie en management kiezen samen richting met draagvlak van het hele team.', icon: '🧭' },
+      { title: 'Productontwikkeling', description: 'Multidisciplinaire teams werken samen aan nieuwe producten of diensten.', icon: '⚙️' },
+      { title: 'Innovatieprogramma\'s', description: 'Innovatietrajecten binnen of tussen organisaties met meerdere belangen en deelnemers.', icon: '💡' },
+      { title: 'Organisatieverandering', description: 'Cultuur- en verandertrajecten waarbij medewerkers actief meedoen aan het ontwerp.', icon: '🔄' },
+      { title: 'Verduurzaming bedrijfsvoering', description: 'Duurzaamheidsprojecten in de eigen bedrijfsvoering met meerdere afdelingen.', icon: '🌱' },
+      { title: 'Samenwerkingstrajecten', description: 'Samenwerken met partners of leveranciers waarbij verwachtingen en rollen helder moeten zijn.', icon: '🤝' },
+    ],
+  },
+
   toolbox: {
     intro: 'YouLab biedt tools die passen bij strategische sessies en klantgericht werken in het MKB — snel inzetbaar, direct bruikbaar.',
     toolSlugs: ['5w1h', 'empathy-map', 'business-model', 'value-proposition', 'actieplan'],
@@ -77,7 +90,7 @@ export default {
   cta: {
     heading: 'Verken YouLab voor MKB',
     body: 'Wil je weten hoe YouLab past bij jouw strategie- of innovatietraject? Plan een korte kennismaking.',
-    primaryCta: { label: 'Plan een kennismaking', href: '/kennismaken' },
+    primaryCta: { label: 'Start je vraagstuk', href: '/kennismaken' },
     secondaryCta: { label: 'Bekijk een projectverhaal', href: '/verhalen' },
   },
 };

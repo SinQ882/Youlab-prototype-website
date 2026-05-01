@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Button } from './ui/button.jsx';
+import ExampleBadge from './ExampleBadge.jsx';
 
 export default function HeroSection() {
   return (
@@ -84,10 +85,10 @@ export default function HeroSection() {
 
           {/* Headline */}
           <h1
-            className="text-foreground font-extrabold leading-[1.08] tracking-tight mb-6"
-            style={{ fontSize: 'clamp(38px, 6vw, 76px)' }}
+            className="text-foreground font-extrabold leading-[1.08] tracking-tight mb-3"
+            style={{ fontSize: 'clamp(36px, 5.5vw, 68px)' }}
           >
-            Van vraagstuk naar{' '}
+            Overzicht in projecten waar{' '}
             <span
               className="relative inline-block"
               style={{
@@ -97,26 +98,31 @@ export default function HeroSection() {
                 backgroundClip: 'text',
               }}
             >
-              gedragen resultaat
+              veel samenkomt
             </span>
           </h1>
+
+          {/* ExampleBadge for title */}
+          <div className="mb-6">
+            <ExampleBadge />
+          </div>
 
           {/* Subclaim */}
           <p className="text-muted-foreground leading-relaxed mb-10 max-w-[580px]"
             style={{ fontSize: 'clamp(16px, 2vw, 20px)' }}>
-            YouLab brengt teams, werkvormen en een bewezen aanpak samen op één plek — zodat projecten niet alleen starten, maar ook landen.
+            Voor vraagstukken met meerdere partijen, belangen en onderdelen. YouLab geeft je een werkmethode en een centrale plek om dat samen aan te pakken.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-3 items-center justify-center">
             <Button variant="gradient" size="lg" asChild>
-              <Link to="/hoe-werkt-het" className="no-underline flex items-center gap-2">
-                Ontdek hoe het werkt <ArrowRight size={16} />
+              <Link to="/kennismaken" className="no-underline flex items-center gap-2">
+                Start je vraagstuk <ArrowRight size={16} />
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link to="/verhalen" className="no-underline flex items-center gap-2">
-                Bekijk een projectverhaal <ChevronRight size={16} />
+              <Link to="/platform" className="no-underline flex items-center gap-2">
+                Bekijk het platform <ChevronRight size={16} />
               </Link>
             </Button>
           </div>
