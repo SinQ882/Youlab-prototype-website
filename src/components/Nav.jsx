@@ -40,7 +40,7 @@ export default function Nav({ scrolled, dark, toggleDark }) {
       <div className="max-w-[1120px] mx-auto px-6 h-[68px] flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 no-underline py-1">
-          <img src="./youlab-icon.svg" alt="YouLab" width={32} height={32} />
+          <img src={import.meta.env.BASE_URL + 'youlab-icon.svg'} alt="YouLab" width={32} height={32} />
           <span className="text-xl font-extrabold text-primary tracking-tight">YouLab</span>
         </Link>
 

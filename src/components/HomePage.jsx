@@ -8,6 +8,7 @@ import ScenarioGuide from './ScenarioGuide.jsx';
 import AudienceRouter from './AudienceRouter.jsx';
 import PartnersSection from './PartnersSection.jsx';
 import StoryTeaser from './StoryTeaser.jsx';
+import AanbodTeaser from './home-v2/AanbodTeaser.jsx';
 import ClosingCta from './ClosingCta.jsx';
 import Footer from './Footer.jsx';
 
@@ -24,6 +25,7 @@ export default function HomePage() {
       <AudienceRouter />
       <PartnersSection />
       <StoryTeaser />
+      <AanbodTeaser />
       <ClosingCta />
       <Footer />
     </main>

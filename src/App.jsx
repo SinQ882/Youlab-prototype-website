@@ -82,6 +82,7 @@ function AppLayout({ dark, setDark }) {
           <Route path="/toolbox"           element={<ToolboxPageWrapper />} />
           <Route path="/updates"           element={<UpdatesPageWrapper />} />
           <Route path="/updates/:id"       element={<UpdateDetailPageWrapper />} />
+          <Route path="/aanbod"            element={<AanbodPage />} />
           <Route path="/kennismaken"       element={<KennismakenPage />} />
           {/* Catch-all */}
           <Route path="*"                  element={<NotFoundPage />} />
@@ -145,7 +146,7 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <ScrollToTop />
         <AppLayout dark={dark} setDark={setDark} />
       </BrowserRouter>
