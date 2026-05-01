@@ -2,6 +2,7 @@ import HeroSection from './HeroSection.jsx';
 import RecognitionSection from './RecognitionSection.jsx';
 import PijlersSection from './PijlersSection.jsx';
 import ImpactSection from './ImpactSection.jsx';
+import PlatformShowcase from './home-v2/PlatformShowcase.jsx';
 import AanpakSection from './AanpakSection.jsx';
 import ScenarioGuide from './ScenarioGuide.jsx';
 import AudienceRouter from './AudienceRouter.jsx';
@@ -17,6 +18,7 @@ export default function HomePage() {
       <RecognitionSection />
       <PijlersSection />
       <ImpactSection />
+      <PlatformShowcase />
       <AanpakSection />
       <ScenarioGuide />
       <AudienceRouter />
