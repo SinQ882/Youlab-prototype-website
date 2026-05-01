@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <!-- 4 arc segments forming the YouLab circular icon -->
+  <!-- Segment 1: bottom-right (7.5° → 82.5°) -->
+  <path d="M 37.86 24.09 A 16 16 0 0 1 24.09 37.86" stroke="#4361EE" stroke-width="7" stroke-linecap="round"/>
+  <!-- Segment 2: bottom-left (97.5° → 172.5°) -->
+  <path d="M 19.91 37.86 A 16 16 0 0 1 6.14 24.09" stroke="#4361EE" stroke-width="7" stroke-linecap="round"/>
+  <!-- Segment 3: top-left (187.5° → 262.5°) -->
+  <path d="M 6.14 19.91 A 16 16 0 0 1 19.91 6.14" stroke="#4361EE" stroke-width="7" stroke-linecap="round"/>
+  <!-- Segment 4: top-right (277.5° → 352.5°) -->
+  <path d="M 24.09 6.14 A 16 16 0 0 1 37.86 19.91" stroke="#4361EE" stroke-width="7" stroke-linecap="round"/>
+</svg>
