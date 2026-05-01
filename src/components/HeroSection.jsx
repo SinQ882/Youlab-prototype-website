@@ -121,7 +121,7 @@ export default function HeroSection() {
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link to="/hoe-werkt-het" className="no-underline flex items-center gap-2">
+              <Link to="/platform" className="no-underline flex items-center gap-2">
                 Bekijk het platform <ChevronRight size={16} />
               </Link>
             </Button>
