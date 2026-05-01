@@ -7,7 +7,6 @@ import UseCaseQuestionTypes from '../components/use-case/UseCaseQuestionTypes.js
 import UseCaseApplications from '../components/use-case/UseCaseApplications.jsx';
 import UseCaseToolbox from '../components/use-case/UseCaseToolbox.jsx';
 import UseCaseStory from '../components/use-case/UseCaseStory.jsx';
-import UseCaseAanbod from '../components/use-case/UseCaseAanbod.jsx';
 import UseCaseFaq from '../components/use-case/UseCaseFaq.jsx';
 import UseCasePartners from '../components/use-case/UseCasePartners.jsx';
 import UseCaseAanbod from '../components/use-case/UseCaseAanbod.jsx';
@@ -29,13 +28,12 @@ export default function VoorSectorPage() {
       <UseCaseRecognition   data={data} accentColor={accentColor} />
       <UseCaseQuestionTypes data={data} accentColor={accentColor} />
       <UseCaseApplications  data={data} accentColor={accentColor} />
-      <UseCaseToolbox      data={data} accentColor={accentColor} />
-      <UseCaseStory        data={data} />
-      <UseCaseAanbod       data={data} accentColor={accentColor} />
-      <UseCaseFaq          data={data} accentColor={accentColor} />
-      <UseCasePartners     data={data} />
-      <UseCaseAanbod       data={data} accentColor={accentColor} />
-      <UseCaseCta          data={data} accentColor={accentColor} />
+      <UseCaseToolbox       data={data} accentColor={accentColor} />
+      <UseCaseStory         data={data} />
+      <UseCaseFaq           data={data} accentColor={accentColor} />
+      <UseCasePartners      data={data} />
+      <UseCaseAanbod        data={data} accentColor={accentColor} />
+      <UseCaseCta           data={data} accentColor={accentColor} />
       <Footer />
     </main>
   );
